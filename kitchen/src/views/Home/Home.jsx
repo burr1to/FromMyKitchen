@@ -1,12 +1,6 @@
 import React from "react";
-import Navbar from "../../components/Layout/Navbar";
-import Footer from "../../components/Layout/Footer";
+import Layout from "../../components/Layout/Layout";
 
 export default function Home() {
-  return (
-    <div>
-      <Navbar />
-      <Footer />
-    </div>
-  );
+  return <Layout></Layout>;
 }

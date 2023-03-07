@@ -14,9 +14,9 @@ export default function Navbar() {
       </h1>
       <ul className='hidden md:flex'>
         <li className='p-4'>Home</li>
-        <li className='p-4'>Home</li>
-        <li className='p-4'>Home</li>
-        <li className='p-4'>Home</li>
+        <li className='p-4'>Recipes</li>
+        <li className='p-4'></li>
+        <li className='p-4'>Start Here</li>
       </ul>
       <div onClick={handleNav} className='block md:hidden'>
         {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
@@ -28,7 +28,7 @@ export default function Navbar() {
             : "fixed left-[-100%] "
         }
       >
-        <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4 mt-3 px-3'>
+        <h1 className='w-full text-2xl font-bold text-[#00df9a] m-2 mt-3 px-3'>
           FromMyKitchen
         </h1>
         <ul className='uppercase p-4'>

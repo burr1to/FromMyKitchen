@@ -19,12 +19,30 @@ export default function Footer() {
           ullam iste repellat consequatur libero reiciendis, blanditiis
           accusantium.
         </p>
-        <div className='flex justify-between md:w-[50%] my-6'>
+        <div className='flex justify-between md:w-[20%] my-6'>
           <FaFacebookSquare size={30} />
           <FaInstagram size={30} />
           <FaTwitterSquare size={30} />
-          <FaGithubSquare size={30} />
-          <FaDribbbleSquare size={30} />
+        </div>
+      </div>
+      <div className='lg:col-span-2 flex justify-around mt-5'>
+        <div>
+          <h4 className='text-2xl font-medium text-gray-400 mb-5'>About Us</h4>
+          <ul>
+            <li className='py-2 text-sm'>Our Vision</li>
+            <li className='py-2 text-sm'>Who We Are</li>
+            <li className='py-2 text-sm'>Search for Recipes</li>
+            <li className='py-2 text-sm'>Our Team</li>
+          </ul>
+        </div>
+        <div>
+          <h4 className='text-2xl font-medium text-gray-400 mb-5'>Support</h4>
+          <ul>
+            <li className='py-2 text-sm'>Contact Us</li>
+            <li className='py-2 text-sm'>Our Policies</li>
+            <li className='py-2 text-sm'>PepeLaugh</li>
+            <li className='py-2 text-sm'>OmegaLul</li>
+          </ul>
         </div>
       </div>
     </div>
