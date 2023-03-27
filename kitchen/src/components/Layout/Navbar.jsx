@@ -12,11 +12,12 @@ export default function Navbar() {
       <h1 className='w-full text-3xl font-bold text-[#00df9a]'>
         FromMyKitchen
       </h1>
-      <ul className='hidden md:flex'>
-        <li className='p-4'>Home</li>
-        <li className='p-4'>Recipes</li>
-        <li className='p-4'></li>
-        <li className='p-4'>Start Here</li>
+      <ul className='hidden md:flex flex-row-reverse items-center w-full'>
+        <li className='px-4 py-3 cursor-pointer border border-[#00df9a] rounded-lg  hover:bg-[#00df9a]  hover:ease-in-out hover:transition-all'>
+          Start Here
+        </li>
+        <li className='p-4 cursor-pointer'>Explore</li>
+        <li className='p-4 cursor-pointer'>Recipes</li>
       </ul>
       <div onClick={handleNav} className='block md:hidden'>
         {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
@@ -32,10 +33,10 @@ export default function Navbar() {
           FromMyKitchen
         </h1>
         <ul className='uppercase p-4'>
-          <li className='p-4 border-b border-gray-600'>Home</li>
-          <li className='p-4 border-b border-gray-600'>Home</li>
-          <li className='p-4 border-b border-gray-600'>Home</li>
-          <li className='p-4 border-b border-gray-600'>Home</li>
+          <li className='p-4 border-b border-gray-600'>Recipes</li>
+          <li className='p-4 border-b border-gray-600'>About Us</li>
+          <li className='p-4 border-b border-gray-600'>Explore</li>
+          <li className='p-4 border-b border-gray-600'>Log Out</li>
         </ul>
       </div>
     </div>

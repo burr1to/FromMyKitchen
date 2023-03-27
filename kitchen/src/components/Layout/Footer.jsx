@@ -19,7 +19,7 @@ export default function Footer() {
           ullam iste repellat consequatur libero reiciendis, blanditiis
           accusantium.
         </p>
-        <div className='flex justify-between md:w-[20%] my-6'>
+        <div className='flex justify-between md:w-[40%] my-6'>
           <FaFacebookSquare size={30} />
           <FaInstagram size={30} />
           <FaTwitterSquare size={30} />
