@@ -9,11 +9,11 @@
   line-height: 1.5;
   font-weight: 400;
   min-width: 450px;
-
-  color-scheme: light dark;
+  --primary: #ff9b00;
+  --secondary: #ffcd40;
+  --text-color: #151413;
+  --background: #fbf6f3;
   color: black;
-  background-color: #fff;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

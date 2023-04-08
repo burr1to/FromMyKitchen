@@ -3,19 +3,22 @@ import { useForm, useFieldArray } from "react-hook-form";
 import Image from "./../../components/Global/Image";
 import test from "./../../assets/login-bg.jpg";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const { register, handleSubmit, control } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    // await axios
-    //   .post("http://localhost:8800/api/users/login", data)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+  const onSubmit = async (data) => {
+    await axios
+      .post("http://localhost:8800/api/users/login", data)
+      .then((res) => {
+        console.log("Successful login");
+        // navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
