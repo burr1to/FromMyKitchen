@@ -4,16 +4,6 @@ import axios from "axios";
 import { useState } from "react";
 
 function Recipe() {
-  const [data, setData] = useState({});
-
-  // const getRecipe = async () =>
-  //   await axios
-  //     .get("https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata")
-  //     .then((res) => {});
-
-  // getRecipe();
-  // console.log(data);
-
   return (
     <Layout>
       <div className='h-[50vh] my-10'>
