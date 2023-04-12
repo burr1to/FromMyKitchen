@@ -11,10 +11,12 @@ export default function Login() {
   const { register, handleSubmit, control } = useForm();
   const onSubmit = async (data) => {
     await axios
-      .post("http://localhost:8800/api/users/login", data)
+      .post("http://localhost:8800/api/users/login", data, {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log("Successful login");
-        // navigate("/");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
