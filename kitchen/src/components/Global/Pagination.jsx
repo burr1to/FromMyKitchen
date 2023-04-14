@@ -11,9 +11,9 @@ function Pagination({ per, total, paginate }) {
       {pageNumbers?.map((number) => (
         <li key={number} className=''>
           <a
-            href='#'
+            href='#!'
             onClick={() => paginate(number)}
-            className='px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+            className='px-4 py-2 leading-tight text-[19px] border border-gray-400 rounded-lg text-black active:bg-slate-900 active:text-white active:border-slate-900 hover:bg-slate-900 hover:text-white hover:border-slate-900 '
           >
             {number}
           </a>

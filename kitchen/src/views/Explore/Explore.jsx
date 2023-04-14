@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Pagination from "../../components/Global/Pagination";
 import Layout from "./../../components/Layout/Layout";
 import ExploreBox from "../../components/Global/ExploreBox";
+import ExploreBy from "./ExploreBy";
 
 function Explore() {
   const [data, setData] = useState([]);
@@ -15,7 +16,7 @@ function Explore() {
     const fetch = async () => {
       setLoading(true);
       const res = await axios.get(
-        "https://www.themealdb.com/api/json/v1/1/search.php?f=f"
+        "https://www.themealdb.com/api/json/v1/1/search.php?f=h"
       );
 
       setData(res.data.meals);
@@ -29,22 +30,27 @@ function Explore() {
   const firstIndex = lastIndex - itemsPerPage;
   const current = data.slice(firstIndex, lastIndex);
 
-  const paginate = (pageNumber) => {
+  const paginate = (pageNumber, e) => {
     setCurrentPage(pageNumber);
   };
 
   return (
     <Layout>
+      <div className='flex justify-center my-20'>
+        <ExploreBy />
+      </div>
       <div className='grid grid-cols-7 max-w-[85%] mx-auto my-14 '>
         <div className='col-span-1'>Sidebar</div>
         <div className=' col-span-6 grid grid-cols-3 gap-x-10 gap-y-10'>
           <ExploreBox item={current} loading={loading} />
-          <Pagination
-            paginate={paginate}
-            per={itemsPerPage}
-            total={data.length}
-          />
         </div>
+      </div>
+      <div className='my-10 flex justify-center max-w-[100%]'>
+        <Pagination
+          paginate={paginate}
+          per={itemsPerPage}
+          total={data.length}
+        />
       </div>
     </Layout>
   );

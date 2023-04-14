@@ -10,15 +10,15 @@ function ExploreBox({ item, loading }) {
         {item?.map((element, index) => (
           <div
             key={index}
-            className='border border-black rounded-md flex flex-col'
+            className='border border-gray-400 rounded-[25px] flex flex-col'
           >
             <div>
               <div className='w-[320px] h-auto p-4 mx-auto'>
-                <Image src={element.strMealThumb} />
+                <Image src={element.strMealThumb} className='rounded-[30px]' />
               </div>
             </div>
-            <div className='text-center mb-4 text-[18px]'>
-              {element.strMeal}{" "}
+            <div className='text-[] text-center my-4 px-2 text-[22px]'>
+              {element.strMeal}
             </div>
           </div>
         ))}
