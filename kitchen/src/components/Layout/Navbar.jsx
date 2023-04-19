@@ -2,12 +2,22 @@ import { React, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import Image from "./../../components/Global/Image";
 import logo from "./../../assets/illustration.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const [nav, setNav] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleNav = () => {
     setNav(!nav);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:8800/api/users/logout");
+    navigate("/login");
   };
   return (
     <div className='flex justify-between items-center max-w-[1360px] mx-auto px-4 relative text-black '>
@@ -20,6 +30,9 @@ export default function Navbar() {
         </li>
         <li className='p-4 cursor-pointer'>Explore</li>
         <li className='p-4 cursor-pointer'>Upload</li>
+        <li onClick={handleSubmit} className='p-4 cursor-pointer'>
+          Logout
+        </li>
       </ul>
       <div onClick={handleNav} className='block md:hidden'>
         {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}

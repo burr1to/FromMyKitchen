@@ -16,7 +16,7 @@ function Explore() {
     const fetch = async () => {
       setLoading(true);
       const res = await axios.get(
-        "https://www.themealdb.com/api/json/v1/1/search.php?f=h"
+        "https://www.themealdb.com/api/json/v1/1/search.php?f=f"
       );
 
       setData(res.data.meals);

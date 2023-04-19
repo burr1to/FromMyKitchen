@@ -1,27 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import Image from "./../../components/Global/Image";
 import test from "./../../assets/login-bg.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
 
   const { register, handleSubmit, control } = useForm();
+
+  const { user, loading, error, dispatch } = useContext(AuthContext);
   const onSubmit = async (data) => {
-    await axios
-      .post("http://localhost:8800/api/users/login", data, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        console.log("Successful login");
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch({ type: "LOGIN_START" });
+    try {
+      await axios
+        .post("http://localhost:8800/api/users/login", data, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+        })
+        .catch((err) => {
+          dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+        });
+    } catch {}
   };
+  console.log(user);
 
   return (
     <div className='m-0 p-0 bg-gradient-to-r from-cyan-500 to-[#00df8f]'>

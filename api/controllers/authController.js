@@ -36,9 +36,29 @@ export const login = async (req, res, next) => {
 
     const { password, ...otherDetails } = user._doc;
     res
-      .cookie("access_token", token, { httpOnly: true })
+      .cookie("access_token", token, {
+        // expires: new Date(Date.now() + 600000),
+        httpOnly: true,
+      })
       .status(200)
       .json({ ...otherDetails }); //to protect password and admin status
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const logout = async (req, res, next) => {
+  try {
+    res.clearCookie("access_token");
+    res.status(200).send("Logged out");
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getCookie = async (req, res, next) => {
+  try {
+    console.log(req.cookies.access_token);
   } catch (error) {
     next(error);
   }
