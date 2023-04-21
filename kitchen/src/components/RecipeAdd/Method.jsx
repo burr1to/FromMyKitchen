@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-function Test() {
+function Method() {
   const [val, setVal] = useState([]);
   const handleAdd = () => {
     const abc = [...val, []];
@@ -30,4 +30,4 @@ function Test() {
     </>
   );
 }
-export default Test;
+export default Method;

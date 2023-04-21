@@ -29,7 +29,6 @@ const RecipeSchema = new mongoose.Schema(
         quantity: Number,
       },
     ],
-
     method: {
       type: [String],
       required: true,

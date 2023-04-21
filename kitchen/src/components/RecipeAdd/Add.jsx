@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import Layout from "../Layout/Layout";
-import Test from "./Test";
+import Method from "./Method";
 
 function Add() {
   const { register, handleSubmit, control } = useForm({
@@ -72,7 +72,6 @@ function Add() {
             Append
           </button>
           <br />
-          <Test />
           <button type='submit'>Submit</button>
         </form>
       </div>

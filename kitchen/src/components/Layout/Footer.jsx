@@ -25,7 +25,7 @@ export default function Footer() {
       <div className='lg:col-span-2 flex justify-around mt-5'>
         <div>
           <h4 className='text-2xl font-medium text-[color:var(--primary)] mb-5'>
-            About Us
+            Explore Us
           </h4>
           <ul className='text-black'>
             <li className='py-2 '>Our Vision</li>

@@ -10,7 +10,7 @@ function ExploreBox({ item, loading }) {
         {item?.map((element, index) => (
           <div
             key={index}
-            className='border border-gray-400 rounded-[25px] flex flex-col'
+            className='border border-[color:var(--primary)] rounded-[25px] flex flex-col'
           >
             <div>
               <div className='w-[320px] h-auto p-4 mx-auto'>
