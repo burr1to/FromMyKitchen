@@ -40,7 +40,7 @@ export default function Navbar() {
       <div
         className={
           nav
-            ? "fixed left-0 top-0 w-[50%] h-full border-r border-r-gray-900 bg-[#000300] text-white ease-in-out duration-500"
+            ? "z-10 fixed left-0 top-0 w-[50%] h-full border-r border-r-gray-900 bg-[#000300] text-white ease-in-out duration-500"
             : "fixed left-[-100%] "
         }
       >

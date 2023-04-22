@@ -5,6 +5,8 @@ import Add from "./components/RecipeAdd/Add";
 import Login from "./views/Login/Login";
 import Explore from "./views/Explore/Explore";
 import Recipe from "./views/Recipe/Recipe";
+import Search from "./views/Search/Search";
+import Ingredients from "./views/Search/Ingredients";
 
 export default function Routedpath() {
   return (
@@ -23,7 +25,9 @@ export default function Routedpath() {
         </Route>
 
         <Route path='explore'>
-          <Route index element={<Explore />} />
+          <Route index element={<Search />} />
+          <Route path='all' element={<Explore />} />
+          <Route path='ingredients' element={<Ingredients />} />
           <Route path=':recipeID' element={<Recipe />} />
         </Route>
       </Route>

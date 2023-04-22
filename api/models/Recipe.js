@@ -29,17 +29,13 @@ const RecipeSchema = new mongoose.Schema(
         quantity: Number,
       },
     ],
-    method: {
-      type: [String],
-      required: true,
-    },
+    method: [{ method: String }],
     photos: {
       type: [String],
     },
-    tags: {
-      type: [String],
-    },
+    tags: [{ tag: String }],
   },
+
   { timestamps: true }
 );
 

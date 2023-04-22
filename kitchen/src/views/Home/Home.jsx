@@ -16,7 +16,9 @@ export default function Home() {
       <div className=''>
         <Slide />
         <div className='text-center mt-20 mb-9'>
-          <span className='text-[28px]'>Our Recipes you might love</span>
+          <span className='text-[32px] text-[color:var(--primary)]'>
+            Our Recipes you might love
+          </span>
         </div>
         <div className='grid grid-cols-4 w-full max-w-[80%] mx-auto mb-28 mt-8 gap-8'>
           {items.map((item, index) => (
