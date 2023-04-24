@@ -21,6 +21,7 @@ export default function Login() {
         })
         .then((res) => {
           dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+          navigate("/");
         })
         .catch((err) => {
           dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });

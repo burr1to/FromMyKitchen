@@ -1,7 +1,5 @@
-import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import Layout from "../Layout/Layout";
-import Method from "./Method";
 import Image from "../Global/Image";
 import upload from "./../../assets/upload.png";
 

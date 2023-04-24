@@ -4,69 +4,116 @@ import Image from "../../components/Global/Image";
 import axios from "axios";
 import { useState } from "react";
 import food from "./../../assets/explore.jpg";
+import Comment from "../../components/Global/Comment";
+import bread from "./../../assets/bread.jpg";
+import samay from "./../../assets/samay.png";
 
 function Recipe() {
+  const [slideNumber, setSlideNumber] = useState(0);
+  const [open, setOpen] = useState(false);
+
   const ingredients = [
     { name: "Ginger", quantity: 3 },
     { name: "Potato", quantity: 5 },
     { name: "Garlic", quantity: 7 },
     { name: "Ginger", quantity: 3 },
     { name: "Potato", quantity: 5 },
-    { name: "Garlic", quantity: 7 },
-    { name: "Ginger", quantity: 3 },
-    { name: "Potato", quantity: 5 },
-    { name: "Garlic", quantity: 7 },
   ];
 
-  const tags = ["cuisine", "newari", "hearty"];
+  const photos = [food, bread, food, samay];
+
+  const tags = [{ tag: "cuisine" }, { tag: "cuisine" }, { tag: "cuisine" }];
+
+  const handleOpen = (index) => {
+    setSlideNumber(index);
+    setOpen(true);
+  };
+
   return (
     <Layout>
-      <div className='my-10 relative'>
-        <div className='grid h md:grid-cols-5 md:max-w-[70%] mx-auto justify-center items-center gap-x-4'>
-          <div className='md:col-span-3 p-10'>
+      <div className='my-10 relative max-w-[75%] mx-auto'>
+        <div className=''>
+          <div className='p-10'>
             <span className='text-7xl'>Samaya Baji</span>
             <p className='my-3 text-[25px]'>Newari Cuisine</p>
             <div>
               <ul>
                 {tags?.map((tag, index) => (
-                  <li className='cursor-pointer inline-block border mx-1 px-4 border-gray-300 rounded-lg'>
-                    #{tag}
+                  <li
+                    className='cursor-pointer inline-block border mx-1 px-4 border-gray-300 rounded-lg'
+                    key={index}
+                  >
+                    #{tag.tag}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className='border border-red-500 py-5 mt-5'>
-              <ul className='text-[18px]'>
-                <li>Prep Time: 2 Hours</li>
-                <li>Cook Time: 1 Hours</li>
-                <li>Feeds: 3 people</li>
-              </ul>
-            </div>
-            <div className='border border-blue-500 mt-10 max-w-[40%]'>
-              <span className='text-3xl my-12'>Ingredients</span>
-              <ul className='text-[19px] my-5'>
-                {ingredients?.map((ingredient, index) => (
-                  <li className='mt-1' key={index}>
-                    <div className='relative '>
-                      {ingredient.name}
-                      <span className='absolute right-0'>
-                        {ingredient.quantity}
-                      </span>
-                    </div>
-                  </li>
+            <div className='flex flex-cols pt-8 gap-x-7 '>
+              <div>
+                {photos.map((photo, index) => (
+                  <Image
+                    key={index}
+                    onClick={() => handleOpen(index)}
+                    src={photo}
+                    className='object-cover cursor-pointer h-[160px] w-[160px] rounded-[25px] my-2'
+                  />
                 ))}
-              </ul>
-            </div>
-            <div className='border border-rose-900 my-5'>
-              <h1 className='text-xl'>Method</h1>
-            </div>
-          </div>
-          <div className='md:col-span-2'>
-            <div className=' md:absolute md:top-0 pt-8'>
-              <Image src={food} alt='' className='' />
-              <div>Multiple images?</div>
+              </div>
+              <div>
+                <Image
+                  src={open ? photos[slideNumber] : samay}
+                  alt=''
+                  className='min-w-[600px] w-[100%] h-[700px] max-w-[900px] object-cover rounded-lg'
+                />
+              </div>
             </div>
           </div>
+          <div>
+            <p className='text-justify'>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum
+            </p>
+          </div>
+          <div className=' py-5 mt-5'>
+            <ul className='text-[22px] flex flex-row space-x-12'>
+              <li className='border border-[color:var(--secondary)] bg-[color:var(--secondary)] py-2 px-5 rounded-lg'>
+                Prep Time: 2 Hours
+              </li>
+              <li className=' border border-[color:var(--secondary)] bg-[color:var(--secondary)] py-2 px-5 rounded-lg'>
+                Cook Time: 1 Hours
+              </li>
+            </ul>
+          </div>
+
+          <div className='my-16 max-w-[20%]'>
+            <span className='text-3xl my-12'>Ingredients</span>
+            <ul className='text-[19px] my-5'>
+              {ingredients?.map((ingredient, index) => (
+                <li className='mt-1' key={index}>
+                  <div className='relative '>
+                    {ingredient.name}
+                    <span className='absolute right-0'>
+                      {ingredient.quantity}
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className='my-16'>
+            <span className='text-3xl'>Instructions</span>
+          </div>
+        </div>
+        <div>
+          <Comment />
         </div>
       </div>
     </Layout>

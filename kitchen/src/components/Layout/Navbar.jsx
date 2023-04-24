@@ -3,7 +3,7 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import Image from "./../../components/Global/Image";
 import logo from "./../../assets/illustration.png";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Navbar() {
   const [nav, setNav] = useState(false);
@@ -16,22 +16,30 @@ export default function Navbar() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8800/api/users/logout");
-    navigate("/login");
+    await axios.post(
+      "http://localhost:8800/api/users/logout",
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    // navigate("/login");
   };
   return (
     <div className='flex justify-between items-center max-w-[1360px] mx-auto px-4 relative text-black '>
       <div className='w-full'>
         <Image src={logo} className='object-contain w-[50%] h-auto' />
       </div>
+
       <ul className='hidden md:flex flex-row-reverse items-center w-full'>
-        <li className='px-4 py-3 cursor-pointer border border-[color:var(--primary)] rounded-lg  hover:bg-[color:var(--primary)] hover:text-white  hover:ease-in-out hover:transition-all'>
-          Start Here
-        </li>
-        <li className='p-4 cursor-pointer'>Explore</li>
-        <li className='p-4 cursor-pointer'>Upload</li>
         <li onClick={handleSubmit} className='p-4 cursor-pointer'>
           Logout
+        </li>
+
+        <li className='p-4 cursor-pointer'>Add Recipe</li>
+        <li className='p-4 cursor-pointer'>Our Kitchen</li>
+        <li className='px-4 py-3 cursor-pointer border border-[color:var(--primary)] rounded-lg'>
+          Start Here
         </li>
       </ul>
       <div onClick={handleNav} className='block md:hidden'>

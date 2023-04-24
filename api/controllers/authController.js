@@ -35,10 +35,12 @@ export const login = async (req, res, next) => {
     );
 
     const { password, ...otherDetails } = user._doc;
+
     res
       .cookie("access_token", token, {
-        // expires: new Date(Date.now() + 600000),
         httpOnly: true,
+        secure: false,
+        maxAge: 60000000,
       })
       .status(200)
       .json({ ...otherDetails }); //to protect password and admin status
@@ -50,7 +52,7 @@ export const login = async (req, res, next) => {
 export const logout = async (req, res, next) => {
   try {
     res.clearCookie("access_token");
-    res.status(200).send("Logged out");
+    res.status(200).send("Log out");
   } catch (err) {
     next(err);
   }

@@ -22,7 +22,7 @@ export default function Home() {
         </div>
         <div className='grid grid-cols-4 w-full max-w-[80%] mx-auto mb-28 mt-8 gap-8'>
           {items.map((item, index) => (
-            <div className='col-span-1 flex flex-col items-center '>
+            <div className='col-span-1 flex flex-col items-center' key={index}>
               <div>
                 <Image
                   src={test}

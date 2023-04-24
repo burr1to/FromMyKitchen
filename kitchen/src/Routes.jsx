@@ -7,11 +7,14 @@ import Explore from "./views/Explore/Explore";
 import Recipe from "./views/Recipe/Recipe";
 import Search from "./views/Search/Search";
 import Ingredients from "./views/Search/Ingredients";
+import Test from "./components/RecipeAdd/Test";
 
 export default function Routedpath() {
   return (
     <Routes>
       <Route path='/'>
+        <Route path='test' element={<Test />} />
+
         <Route index element={<Home />} />
         <Route path='login' element={<Login />} />
         {/* 
