@@ -20,6 +20,7 @@ export default function Login() {
           withCredentials: true,
         })
         .then((res) => {
+          console.log(res.data);
           dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
           navigate("/");
         })
@@ -28,7 +29,6 @@ export default function Login() {
         });
     } catch {}
   };
-  console.log(user);
 
   return (
     <div className='m-0 p-0 bg-gradient-to-r from-cyan-500 to-[#00df8f]'>

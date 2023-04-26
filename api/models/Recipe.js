@@ -2,27 +2,21 @@ import mongoose from "mongoose";
 
 const RecipeSchema = new mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
     },
-    prepHours: {
+    pTime: {
       type: Number,
       required: true,
     },
-    prepMins: {
+    cTime: {
       type: Number,
       required: true,
     },
-    cookHours: {
-      type: Number,
-      required: true,
+    description: {
+      type: String,
     },
-    cookMins: {
-      type: Number,
-      required: true,
-    },
-
     ingredients: [
       {
         name: String,

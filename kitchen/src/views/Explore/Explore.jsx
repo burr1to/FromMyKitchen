@@ -9,7 +9,7 @@ function Explore() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(6);
 
   useEffect(() => {
     const fetch = async () => {
