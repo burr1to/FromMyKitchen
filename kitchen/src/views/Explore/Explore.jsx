@@ -36,9 +36,11 @@ function Explore() {
   return (
     <Layout>
       <div className='flex justify-center my-20'></div>
-      <div className='grid grid-cols-7 max-w-[85%] mx-auto my-14 '>
-        <div className='col-span-1'>Sidebar</div>
-        <div className=' col-span-6 grid grid-cols-3 gap-x-10 gap-y-10'>
+      <div className='grid sm:grid-cols-6 md:grid-cols-7 max-w-[85%] mx-auto my-14 '>
+        <div className='col-span-1 flex justify-center'>
+          <span className=''>Filter</span>
+        </div>
+        <div className=' col-span-6 grid sm:grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10'>
           <ExploreBox item={current} loading={loading} />
         </div>
       </div>

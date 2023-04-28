@@ -7,6 +7,7 @@ import food from "./../../assets/explore.jpg";
 import Comment from "../../components/Global/Comment";
 import bread from "./../../assets/bread.jpg";
 import samay from "./../../assets/samay.png";
+import { useNavigate } from "react-router-dom";
 
 function Recipe() {
   const [slideNumber, setSlideNumber] = useState(0);
@@ -22,12 +23,16 @@ function Recipe() {
 
   const photos = [food, bread, food, samay];
 
-  const tags = [{ tag: "cuisine" }, { tag: "cuisine" }, { tag: "cuisine" }];
+  const tags = [{ tag: "cuisine" }, { tag: "newari" }, { tag: "hearty" }];
 
   const handleOpen = (index) => {
     setSlideNumber(index);
     setOpen(true);
   };
+
+  const [tag, setTag] = useState();
+
+  const navigate = useNavigate();
 
   return (
     <Layout>
@@ -42,6 +47,10 @@ function Recipe() {
                   <li
                     className='cursor-pointer inline-block border mx-1 px-4 border-gray-300 rounded-lg'
                     key={index}
+                    onClick={() => {
+                      setTag(tag.tag);
+                      navigate(`/${tag.tag}`, { state: { tag } });
+                    }}
                   >
                     #{tag.tag}
                   </li>

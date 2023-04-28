@@ -16,6 +16,7 @@ const RecipeSchema = new mongoose.Schema(
     },
     description: {
       type: String,
+      required: true,
     },
     ingredients: [
       {
@@ -23,10 +24,14 @@ const RecipeSchema = new mongoose.Schema(
         quantity: Number,
       },
     ],
-    method: [{ method: String }],
-    photos: {
-      type: [String],
-    },
+    method: [{ method: { type: String, required: true } }],
+    photos: [
+      {
+        name: { type: String, required: true },
+        path: { type: String, required: true },
+        mimetype: { type: String, required: true },
+      },
+    ],
     tags: [{ tag: String }],
   },
 

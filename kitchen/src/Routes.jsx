@@ -9,13 +9,13 @@ import Search from "./views/Search/Search";
 import Ingredients from "./views/Search/Ingredients";
 import Test from "./components/RecipeAdd/Test";
 import Register from "./views/Login/Register";
+import Tag from "./views/Search/Tag";
 
 export default function Routedpath() {
   return (
     <Routes>
       <Route path='/'>
         <Route path='test' element={<Test />} />
-
         <Route index element={<Home />} />
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<Register />} />
@@ -26,15 +26,18 @@ export default function Routedpath() {
         </Route> */}
 
         <Route path='recipes'>
-          <Route index element={<Add />} />
+          <Route index element={<Search />} />
+          <Route path='ingredients' element={<Ingredients />} />
+          <Route path='add' element={<Add />} />
+          <Route path=':tag' element={<Tag />} />
         </Route>
 
         <Route path='explore'>
-          <Route index element={<Search />} />
-          <Route path='all' element={<Explore />} />
-          <Route path='ingredients' element={<Ingredients />} />
+          <Route index element={<Explore />} />
           <Route path=':recipeID' element={<Recipe />} />
         </Route>
+
+        <Route path=':tag' element={<Tag />} />
       </Route>
     </Routes>
   );

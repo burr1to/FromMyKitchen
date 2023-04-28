@@ -28,7 +28,7 @@ function ExploreBox({ item, loading, status }) {
               key={index}
               className='border border-[color:var(--primary)] rounded-[25px] flex flex-col'
             >
-              <div className='w-[320px] h-auto p-4 mx-auto'>
+              <div className='w-[90%] h-auto p-4 mx-auto'>
                 <Image src={element.strMealThumb} className='rounded-[30px]' />
               </div>
 
