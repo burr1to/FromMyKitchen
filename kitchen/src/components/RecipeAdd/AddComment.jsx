@@ -1,12 +1,25 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-
+import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 function AddComment() {
-  const [comment, setComment] = useState("");
-  const { register, handleSubmit, control } = useForm();
+  const user = useContext(AuthContext);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const { register, handleSubmit, control, reset } = useForm();
+
+  const onSubmit = async (data) => {
+    await axios.post(
+      "http://localhost:8800/api/comments",
+      {
+        userID: user.user._id,
+        name: user.user.username,
+        text: data.text,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    reset();
   };
   return (
     <div className=''>
@@ -17,10 +30,10 @@ function AddComment() {
         <div className='mb-4'>
           <textarea
             type='text'
-            id='comment'
+            id='text'
             className='mt-5 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             placeholder='Enter your comment'
-            {...register("comment", { required: true, maxLength: 100 })}
+            {...register("text", { required: true, maxLength: 100 })}
           />
         </div>
         <div className='flex items-center justify-between'>

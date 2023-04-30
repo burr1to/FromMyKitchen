@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import recipeRoute from "./routes/recipe.js";
 import userRoute from "./routes/users.js";
+import commentRoute from "./routes/comment.js";
 
 const app = express();
 dotenv.config();
@@ -31,6 +32,7 @@ app.use(express.json());
 
 app.use("/api/recipes", recipeRoute);
 app.use("/api/users", userRoute);
+app.use("/api/comments", commentRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

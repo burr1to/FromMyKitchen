@@ -3,13 +3,25 @@ import ingredient from "./../../assets/upload.png";
 import Image from "../../components/Global/Image";
 import logo from "./../../assets/Illustration.png";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useState } from "react";
 
 function Register() {
-  const { register, handleSubmit, control } = useForm();
+  const { register, handleSubmit, control, reset } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    await axios
+      .post("http://localhost:8800/api/users/register", data, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
   return (
     <div className='grid grid-cols-3 h-[100vh] max-h-[100vh]'>
       <div className='relative'>
@@ -31,9 +43,9 @@ function Register() {
               </label>
               <input
                 type='text'
-                id='fname'
+                id='name'
                 className=''
-                {...register("fname", { required: true, maxLength: 30 })}
+                {...register("name", { required: true, maxLength: 30 })}
               />
             </div>
             <div className='flex flex-col w-full'>
@@ -44,7 +56,10 @@ function Register() {
                 type='text'
                 id='username'
                 className=''
-                {...register("username", { required: true, maxLength: 30 })}
+                {...register("username", {
+                  required: true,
+                  maxLength: 30,
+                })}
               />
             </div>
           </section>
@@ -54,8 +69,8 @@ function Register() {
                 <span className='text-xl'>Email Address</span>
               </label>
               <input
-                type='text'
-                id='fname'
+                type='email'
+                id='email'
                 className=''
                 {...register("email", { required: true, maxLength: 30 })}
               />
@@ -67,26 +82,18 @@ function Register() {
                 <span className='text-xl'>Password</span>
               </label>
               <input
-                type='text'
-                id='fname'
+                type='password'
+                id='password'
                 className=''
-                {...register("email", { required: true, maxLength: 30 })}
+                {...register("password", {
+                  required: true,
+                  maxLength: 30,
+                  minLength: { value: 8, message: "8 characters minimum!!!" },
+                })}
               />
             </div>
           </section>
-          <section className='flex w-full space-x-5 justify-evenly'>
-            <div className='flex flex-col w-full'>
-              <label>
-                <span className='text-xl'>Verify Password</span>
-              </label>
-              <input
-                type='text'
-                id='fname'
-                className=''
-                {...register("email", { required: true, maxLength: 30 })}
-              />
-            </div>
-          </section>
+
           <button>Create Account</button>
         </form>
         <div>Already have an account? Log In</div>

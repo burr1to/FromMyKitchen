@@ -29,7 +29,6 @@ export default function Routedpath() {
           <Route index element={<Search />} />
           <Route path='ingredients' element={<Ingredients />} />
           <Route path='add' element={<Add />} />
-          <Route path=':tag' element={<Tag />} />
         </Route>
 
         <Route path='explore'>
