@@ -1,7 +1,7 @@
 import { React, useState, useContext } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import Image from "./../../components/Global/Image";
-import logo from "./../../assets/illustration.png";
+import logo from "./../../assets/Illustration.png";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";

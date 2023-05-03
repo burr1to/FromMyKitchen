@@ -7,7 +7,7 @@ import {
   FaTwitterSquare,
 } from "react-icons/fa";
 import Image from "./../../components/Global/Image";
-import logo from "./../../assets/illustration.png";
+import logo from "./../../assets/Illustration.png";
 
 export default function Footer() {
   return (
