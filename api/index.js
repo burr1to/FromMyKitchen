@@ -6,6 +6,8 @@ import cors from "cors";
 import recipeRoute from "./routes/recipe.js";
 import userRoute from "./routes/users.js";
 import commentRoute from "./routes/comment.js";
+import upload from "./utils/upload.js";
+import path from "path";
 
 const app = express();
 dotenv.config();
@@ -30,6 +32,7 @@ app.use(cookieParser());
 
 app.use(express.json());
 
+app.use("/uploads", express.static("uploads"));
 app.use("/api/recipes", recipeRoute);
 app.use("/api/users", userRoute);
 app.use("/api/comments", commentRoute);

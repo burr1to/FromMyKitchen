@@ -8,6 +8,7 @@ import ingredient from "./../../assets/ingredient.png";
 import ExploreBox from "../../components/Global/ExploreBox";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Latest from "../../components/Global/Latest";
 
 function Search() {
   const [data, setData] = useState([]);
@@ -64,7 +65,7 @@ function Search() {
             <Image src={all} />
 
             <Link
-              to='/explore/all'
+              to='/explore'
               className='text-xl hover:underline cursor-pointer hover:text-[color:var(--primary)]'
             >
               Explore Recipes
@@ -81,9 +82,10 @@ function Search() {
           </div>
         </div>
       </div>
-      {/* <div>
-        <ExploreBox item={data} loading={loading} />
-      </div> */}
+      <div className='max-w-[70%] mx-auto my-15'>
+        <h1 className='my-10 text-3xl text-center'>Latest Uploaded Recipes</h1>
+        <Latest />
+      </div>
     </Layout>
   );
 }

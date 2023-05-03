@@ -2,8 +2,16 @@ import mongoose from "mongoose";
 
 const RecipeSchema = new mongoose.Schema(
   {
+    userID: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
+      required: true,
+    },
+    size: {
+      type: Number,
       required: true,
     },
     pTime: {
@@ -24,14 +32,12 @@ const RecipeSchema = new mongoose.Schema(
         quantity: Number,
       },
     ],
-    method: [{ method: { type: String, required: true } }],
-    photos: [
-      {
-        name: { type: String, required: true },
-        path: { type: String, required: true },
-        mimetype: { type: String, required: true },
-      },
-    ],
+    photo: {
+      name: String,
+      path: String,
+    },
+    methods: [{ method: String }],
+
     tags: [{ tag: String }],
   },
 

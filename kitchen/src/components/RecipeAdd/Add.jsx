@@ -2,38 +2,16 @@ import { useForm, useFieldArray } from "react-hook-form";
 import Layout from "../Layout/Layout";
 import Image from "../Global/Image";
 import upload from "./../../assets/upload.png";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 
 function Add() {
   const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState(null);
   const a = useContext(AuthContext);
 
-  const [finalData, setFinaldata] = useState({
-    ctime: null,
-    ptime: null,
-    description: null,
-    ingredients: {},
-    methods: {},
-    tags: {},
-    size: null,
-    name: null,
-    id: null,
-  });
-
-  useEffect(() => {
-    setLoading(true);
-    console.log(a.user);
-    setLoading(false);
-  }, []);
-
-  const { register, handleSubmit, control } = useForm({
-    defaultValues: {
-      ingredients: [{ name: "", quantity: 0 }],
-      methods: [{ method: "Cut it out " }],
-      tags: [{ tag: "cuisine" }],
-    },
-  });
+  const { register, handleSubmit, control } = useForm({});
   const {
     fields: ingFields,
     append: ingAppend,
@@ -61,83 +39,126 @@ function Add() {
     control,
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // setFinaldata({
-    //   ctime: data.ctime,
-    //   ptime: data.ptime,
-    //   ingredients: data.ingredients,
-    //   methods: data.methods,
-    //   tags: data.tags,
-    //   size: data.size,
-    //   name: data.name,
-    //   id: a.user._id,
-    // });
+  const handleChange = (e) => {
+    console.log(e.target.files[0]);
+    setFile(e.target.files[0]);
   };
+
+  const onSubmit = async (data) => {
+    const photoForm = new FormData();
+    const fileName = Date.now() + file.name;
+
+    const form = new FormData();
+    form.append("ctime", data.ctime);
+    form.append("ptime", data.ptime);
+    form.append("description", data.description);
+    form.append("ingredients", JSON.stringify(data.ingredients));
+    form.append("methods", JSON.stringify(data.methods));
+    form.append("tags", JSON.stringify(data.tags));
+    form.append("size", data.size);
+    form.append("name", a.user.name);
+    form.append("id", a.user._id);
+    form.append("photo", fileName);
+    form.append("path");
+
+    photoForm.append("name", fileName);
+    photoForm.append("file", file);
+
+    await axios
+      .post("http://localhost:8800/api/recipes/photo", photoForm, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    await axios
+      .post("http://localhost:8800/api/recipes", form, {
+        headers: {
+          withCredentials: true,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   if (loading) {
     return <h2>Loading..</h2>;
   } else {
     return (
       <Layout>
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-2 '>
           <div className=''>
             <div className='w-full my-16 px-10 max-w-[90%] mx-auto'>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                  <input
-                    type='file'
-                    {...register("image", { required: "Image is required" })}
-                  />
-                </div>
-                <div className='flex flex-col gap-y-2 w-full my-5'>
+                <div className='flex flex-col gap-y-5 w-full my-8'>
+                  <p className='my-8 text-4xl'>Add your own personal recipe</p>
                   <label>
-                    <span className='text-xl '>Name</span>
+                    <span className='text-[color:var(--primary)] text-xl'>
+                      Name
+                    </span>
                   </label>
                   <input
                     type='text'
                     id='name'
-                    className='border-0 border-b-2 focus:outline-none'
+                    className='border-0 border-b-2 focus:outline-none border-gray-400'
                     {...register("name", { required: true, maxLength: 30 })}
                   />
                 </div>
-                <div className=' flex gap-x-10'>
-                  <div className=' flex flex-col w-full gap-y-2 '>
+                <div className='flex gap-x-12'>
+                  <div className=' flex flex-col w-full gap-y-4 '>
                     <label>
-                      <span className='text-xl'>Prep Time (mins)</span>
+                      <span className=' text-[color:var(--primary)]  text-xl'>
+                        Prep Time (mins)
+                      </span>
                     </label>
                     <input
                       type='number'
                       id='ptime'
-                      className='border-0 border-b-2 focus:outline-none'
+                      className='border-0 border-b-2 focus:outline-none border-gray-400'
                       {...register("ptime", { required: true, maxLength: 30 })}
                     />
                   </div>
-                  <div className=' flex flex-col w-full gap-y-2 '>
+                  <div className=' flex flex-col w-full gap-y-4 '>
                     <label>
-                      <span className='text-xl'>Cooking Time (mins)</span>
+                      <span className=' text-[color:var(--primary)]  text-xl'>
+                        Cooking Time (mins)
+                      </span>
                     </label>
                     <input
                       id='ctime'
                       type='number'
-                      className='border-0 border-b-2 focus:outline-none'
+                      className='border-0 border-b-2 focus:outline-none border-gray-400'
                       {...register("ctime", { required: true, maxLength: 30 })}
                     />
                   </div>
                 </div>
-                <div className=' flex flex-col w-full gap-y-2 my-5 '>
+                <div className=' flex flex-col w-full gap-y-4 my-8 '>
                   <label>
-                    <span className='text-xl'>Serving Size</span>
+                    <span className=' text-[color:var(--primary)]  text-xl'>
+                      Serving Size
+                    </span>
                   </label>
                   <input
                     id='size'
                     type='number'
                     {...register("size", { required: true, maxLength: 30 })}
-                    className='border-0 border-b-2 focus:outline-none'
+                    className='border-0 border-b-2 focus:outline-none border-gray-400'
                   />
                 </div>
-                <div className=' flex flex-col w-full gap-y-2 my-5 '>
+                <div className=' flex flex-col w-full gap-y-6 my-8 '>
                   <label>
-                    <span className='text-xl'>Description</span>
+                    <span className=' text-[color:var(--primary)] text-xl'>
+                      Description
+                    </span>
                   </label>
                   <input
                     id='size'
@@ -146,12 +167,14 @@ function Add() {
                       required: true,
                       maxLength: 30,
                     })}
-                    className='border-2 px-4 rounded-lg focus:outline-none'
+                    className='border-2 px-4 rounded-lg focus:outline-none border-gray-400'
                   />
                 </div>
                 <div className='my-7 '>
                   <label>
-                    <span className='text-xl'>Ingredients</span>
+                    <span className=' text-[color:var(--primary)] text-xl'>
+                      Ingredients
+                    </span>
                   </label>
                   {ingFields.map((field, index) => {
                     return (
@@ -162,7 +185,7 @@ function Add() {
                         <div className='flex flex-col'>
                           <span>Ingredient</span>
                           <input
-                            className='border-0 border-b-2 focus:outline-none'
+                            className='border-0 border-b-2 focus:outline-none border-gray-400'
                             {...register(`ingredients.${index}.name`)}
                           />
                         </div>
@@ -170,7 +193,7 @@ function Add() {
                           <label>Quantity</label>
                           <input
                             type='number'
-                            className='border-0 border-b-2 focus:outline-none'
+                            className='border-0 border-b-2 focus:outline-none border-gray-400'
                             {...register(`ingredients.${index}.quantity`, {
                               valueAsNumber: true,
                             })}
@@ -178,7 +201,8 @@ function Add() {
                         </div>
                         <div>
                           <button
-                            className='border border-black p-1 rounded-lg'
+                            type='button'
+                            className=' text-white bg-[color:var(--primary)] py-1 px-3 rounded-lg'
                             onClick={() => {
                               ingRemove(index);
                             }}
@@ -191,7 +215,8 @@ function Add() {
                   })}
                   <div className=' mt-3'>
                     <button
-                      className='border border-black p-1 rounded-lg'
+                      type='button'
+                      className=' text-white bg-[color:var(--primary)] py-1 px-3 rounded-lg'
                       onClick={() => {
                         ingAppend({
                           name: "",
@@ -206,7 +231,9 @@ function Add() {
 
                 <div className='my-7 '>
                   <label>
-                    <span className='text-xl'>Methods</span>
+                    <span className='text-xl  text-[color:var(--primary)] '>
+                      Methods
+                    </span>
                   </label>
                   {metFields.map((field, index) => {
                     return (
@@ -217,14 +244,15 @@ function Add() {
                         <div className='flex'>
                           <h1 className='text-[18px]'>{index + 1}.</h1>
                           <input
-                            className='border-0 border-b-2 focus:outline-none'
+                            className='border-0 border-b-2 focus:outline-none border-gray-400'
                             {...register(`methods.${index}.method`)}
                           />
                         </div>
 
                         <div>
                           <button
-                            className='border border-black p-1 rounded-lg'
+                            type='button'
+                            className=' text-white bg-[color:var(--primary)] py-1 px-3 rounded-lg'
                             onClick={() => {
                               metRemove(index);
                             }}
@@ -237,7 +265,8 @@ function Add() {
                   })}
                   <div className=' mt-3'>
                     <button
-                      className='border border-black p-1 rounded-lg'
+                      type='button'
+                      className=' text-white bg-[color:var(--primary)] py-1 px-3 rounded-lg'
                       onClick={() => {
                         metAppend({
                           method: "",
@@ -251,7 +280,9 @@ function Add() {
 
                 <div className='my-7 '>
                   <label>
-                    <span className='text-xl'>Tags</span>
+                    <span className=' text-[color:var(--primary)]  text-xl'>
+                      Tags
+                    </span>
                   </label>
                   {tagFields.map((field, index) => {
                     return (
@@ -262,14 +293,15 @@ function Add() {
                         <div className='flex'>
                           <h1 className='text-[18px]'>{index + 1}.</h1>
                           <input
-                            className='border-0 border-b-2 focus:outline-none'
+                            className='border-0 border-b-2 focus:outline-none border-gray-400'
                             {...register(`tags.${index}.tag`)}
                           />
                         </div>
 
                         <div>
                           <button
-                            className='border border-black p-1 rounded-lg'
+                            type='button'
+                            className=' text-white bg-[color:var(--primary)] py-1 px-3 rounded-lg'
                             onClick={() => {
                               tagRemove(index);
                             }}
@@ -282,7 +314,8 @@ function Add() {
                   })}
                   <div className=' mt-3'>
                     <button
-                      className='border border-black p-1 rounded-lg'
+                      type='button'
+                      className=' text-white bg-[color:var(--primary)] py-1 px-3 rounded-lg'
                       onClick={() => {
                         tagAppend({
                           tag: "",
@@ -292,8 +325,21 @@ function Add() {
                       Add Tags
                     </button>
                   </div>
+                  <div className='my-10'>
+                    <input
+                      type='file'
+                      id='image'
+                      onChange={handleChange}
+                      className='border-none'
+                    />
+                  </div>
                 </div>
-                <button type='submit'>Submit</button>
+                <button
+                  type='submit'
+                  className=' text-white bg-[color:var(--primary)] py-1 px-3 rounded-lg'
+                >
+                  Submit
+                </button>
               </form>
             </div>
           </div>

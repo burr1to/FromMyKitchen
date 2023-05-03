@@ -14,6 +14,11 @@ const CommentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
+  recipeID: {
+    type: String,
+    required: true,
+  },
 });
 
 export default mongoose.model("Comment", CommentSchema);

@@ -2,17 +2,22 @@ import express from "express";
 import {
   createRecipe,
   uploadPhoto,
-  getPhoto,
+  getSingleRecipe,
+  getAllRecipes,
 } from "../controllers/recipeController.js";
 import { verifyUser } from "../utils/verify.js";
-import multer from "multer";
+import upload from "./../utils/upload.js";
+
 const router = express.Router();
 
-const upload = multer({ dest: "controllers/photos" });
+router.post("/", upload.single("file"), createRecipe);
 
-router.post("/", verifyUser, createRecipe);
+router.post("/photo", upload.single("file"), uploadPhoto);
 
-router.post("/photo", upload.single("photo"), uploadPhoto);
-router.get("/photo/:id", getPhoto);
+router.get("/:id", getSingleRecipe);
+router.get("/", getAllRecipes);
+
+// router.put()
+// router.delete()
 
 export default router;

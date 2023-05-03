@@ -10,6 +10,8 @@ import Ingredients from "./views/Search/Ingredients";
 import Test from "./components/RecipeAdd/Test";
 import Register from "./views/Login/Register";
 import Tag from "./views/Search/Tag";
+import Edit from "./components/Profile/Edit";
+import Profile from "./views/Profile/Profile";
 
 export default function Routedpath() {
   return (
@@ -19,11 +21,11 @@ export default function Routedpath() {
         <Route index element={<Home />} />
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<Register />} />
-        {/* 
+
         <Route path='profile'>
           <Route index element={<Profile />} />
           <Route index='edit' element={<Edit />} />
-        </Route> */}
+        </Route>
 
         <Route path='recipes'>
           <Route index element={<Search />} />
