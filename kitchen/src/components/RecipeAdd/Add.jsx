@@ -9,6 +9,7 @@ import axios from "axios";
 function Add() {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
+  const [image, setImage] = useState([]);
   const a = useContext(AuthContext);
 
   const { register, handleSubmit, control } = useForm({});
@@ -40,8 +41,22 @@ function Add() {
   });
 
   const handleChange = (e) => {
-    console.log(e.target.files[0]);
+
     setFile(e.target.files[0]);
+
+    const imgFile = e.target.files;
+    const imgArray = Array.from(imgFile);
+
+    const showPreview = imgArray.map((file) => {
+      return URL.createObjectURL(file);
+    });
+
+    setImage(showPreview);
+  };
+
+  const handleDelete = (element) => {
+    setImage(image.filter((e) => e !== element));
+    URL.revokeObjectURL(element);
   };
 
   const onSubmit = async (data) => {
@@ -332,6 +347,17 @@ function Add() {
                       onChange={handleChange}
                       className='border-none'
                     />
+                    <div className="border border-black">
+                      {image &&
+                        image.map((element, index) => {
+                          return (
+                            <div key={index}>
+                              <Image src={element} className="w-[400px] h-auto max-w-[800px] object-cover" />
+                              <button onClick={() => handleDelete(element)}>Delete</button>
+                            </div>
+                          );
+                        })}
+                    </div>
                   </div>
                 </div>
                 <button
