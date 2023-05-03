@@ -5,6 +5,7 @@ import upload from "./../../assets/upload.png";
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import { BiUpload } from "react-icons/bi"
 
 function Add() {
   const [loading, setLoading] = useState(false);
@@ -330,7 +331,7 @@ function Add() {
                   <div className=' mt-3'>
                     <button
                       type='button'
-                      className=' text-white bg-[color:var(--primary)] py-1 px-3 rounded-lg'
+                      className=' text-white bg-[colsor:var(--primary)] py-1 px-3 rounded-lg'
                       onClick={() => {
                         tagAppend({
                           tag: "",
@@ -341,13 +342,18 @@ function Add() {
                     </button>
                   </div>
                   <div className='my-10'>
+                    <label htmlFor="image" className="">
+                      <div className="flex items-center gap-x-3">
+                        <BiUpload size="30px" />
+                        <p>Upload your photo</p>
+                      </div></label>
                     <input
                       type='file'
                       id='image'
                       onChange={handleChange}
-                      className='border-none'
+                      className='border-0 outline-0 hidden'
                     />
-                    <div className="border border-black">
+                    <div className="my-10 border border-gray-100">
                       {image &&
                         image.map((element, index) => {
                           return (
