@@ -1,9 +1,5 @@
 import Recipe from "../models/Recipe.js";
-import Photo from "../models/Photo.js";
-import multer from "multer";
 import { createError } from "../utils/error.js";
-import path from "path";
-import upload from "../utils/upload.js";
 
 export const createRecipe = async (req, res, next) => {
   try {
@@ -62,3 +58,5 @@ export const uploadPhoto = async (req, res, next) => {
 //   res.setHeader("Content-Type", "image/jpeg");
 //   res.sendFile(path.join(yo, photo.path));
 // };
+
+export const loveRecipe = async (req, res, next) => {};

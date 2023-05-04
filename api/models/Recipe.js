@@ -33,7 +33,7 @@ const RecipeSchema = new mongoose.Schema(
       },
     ],
     photo: {
-      name: String,
+      type: String,
     },
     methods: [{ method: String }],
 

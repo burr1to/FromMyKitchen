@@ -1,9 +1,12 @@
 import React from "react";
 import Image from "./Image";
+import { Link } from "react-router-dom";
 
 function ExploreBox({ item, loading, status }) {
+  const imgPath = "http://localhost:8800/uploads";
+  const nextPath = "http://localhost:5173/explore";
   if (loading) {
-    return "";
+    return "Loading...";
   } else {
     if (status === "search")
       return (
@@ -24,18 +27,23 @@ function ExploreBox({ item, loading, status }) {
       return (
         <>
           {item?.map((element, index) => (
-            <div
+            <Link
+              to={`${nextPath}/${element._id}`}
               key={index}
               className='border border-[color:var(--primary)] rounded-[25px] flex flex-col'
             >
               <div className='w-[90%] h-auto p-4 mx-auto'>
-                <Image src={element.strMealThumb} className='rounded-[30px]' />
+                <Image
+                  src={`${imgPath}/${element.photo}`}
+                  alt='wtf'
+                  className='rounded-[30px]'
+                />
               </div>
 
               <div className='text-[] text-center my-4 px-2 text-[22px]'>
-                {element.strMeal}
+                {element.name}
               </div>
-            </div>
+            </Link>
           ))}
         </>
       );

@@ -5,10 +5,12 @@ import upload from "./../../assets/upload.png";
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import { BiUpload } from "react-icons/bi";
 
 function Add() {
   const [loading, setLoading] = useState(false);
-  const [file, setFile] = useState(null);
+  const [img, setImg] = useState(null);
+  const [image, setImage] = useState([]);
   const a = useContext(AuthContext);
 
   const { register, handleSubmit, control } = useForm({});
@@ -40,13 +42,26 @@ function Add() {
   });
 
   const handleChange = (e) => {
-    console.log(e.target.files[0]);
-    setFile(e.target.files[0]);
+    setImg(e.target.files[0]);
+
+    const imgFile = e.target.files;
+    const imgArray = Array.from(imgFile);
+
+    const showPreview = imgArray.map((file) => {
+      return URL.createObjectURL(file);
+    });
+
+    setImage(showPreview);
+  };
+
+  const handleDelete = (element) => {
+    setImage(image.filter((e) => e !== element));
+    URL.revokeObjectURL(element);
   };
 
   const onSubmit = async (data) => {
     const photoForm = new FormData();
-    const fileName = Date.now() + file.name;
+    const fileName = Date.now() + img.name;
 
     const form = new FormData();
     form.append("ctime", data.ctime);
@@ -56,12 +71,12 @@ function Add() {
     form.append("methods", JSON.stringify(data.methods));
     form.append("tags", JSON.stringify(data.tags));
     form.append("size", data.size);
-    form.append("name", a.user.name);
+    form.append("name", data.name);
     form.append("id", a.user._id);
     form.append("photo", fileName);
 
     photoForm.append("name", fileName);
-    photoForm.append("file", file);
+    photoForm.append("file", img);
 
     await axios
       .post("http://localhost:8800/api/recipes/photo", photoForm, {
@@ -164,7 +179,6 @@ function Add() {
                     type='text'
                     {...register("description", {
                       required: true,
-                      maxLength: 30,
                     })}
                     className='border-2 px-4 rounded-lg focus:outline-none border-gray-400'
                   />
@@ -240,10 +254,10 @@ function Add() {
                         className='flex gap-x-10 p-4 items-center'
                         key={field.id}
                       >
-                        <div className='flex'>
+                        <div className='flex w-full'>
                           <h1 className='text-[18px]'>{index + 1}.</h1>
                           <input
-                            className='border-0 border-b-2 focus:outline-none border-gray-400'
+                            className='border-0 border-b-2 focus:outline-none border-gray-400 w-full'
                             {...register(`methods.${index}.method`)}
                           />
                         </div>
@@ -325,12 +339,34 @@ function Add() {
                     </button>
                   </div>
                   <div className='my-10'>
+                    <label htmlFor='image' className=''>
+                      <div className='flex items-center gap-x-3'>
+                        <BiUpload size='30px' />
+                        <p>Upload your photo</p>
+                      </div>
+                    </label>
                     <input
                       type='file'
                       id='image'
                       onChange={handleChange}
-                      className='border-none'
+                      className='border-0 outline-0 hidden'
                     />
+                    <div className='my-10 border border-gray-100'>
+                      {image &&
+                        image.map((element, index) => {
+                          return (
+                            <div key={index}>
+                              <Image
+                                src={element}
+                                className='w-[400px] h-auto max-w-[800px] object-cover'
+                              />
+                              <button onClick={() => handleDelete(element)}>
+                                Delete
+                              </button>
+                            </div>
+                          );
+                        })}
+                    </div>
                   </div>
                 </div>
                 <button

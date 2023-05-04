@@ -3,7 +3,8 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 function Profile() {
-  const [user, setUser] = useContext(AuthContext);
+  const user = useContext(AuthContext);
+  console.log(user.user);
   return <div>Profile</div>;
 }
 
