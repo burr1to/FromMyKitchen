@@ -23,8 +23,8 @@ export default function Routedpath() {
         <Route path='signup' element={<Register />} />
 
         <Route path='profile'>
-          <Route index element={<Profile />} />
-          <Route index='edit' element={<Edit />} />
+          <Route path=':id' element={<Profile />} />
+          <Route path='edit' element={<Edit />} />
         </Route>
 
         <Route path='recipes'>

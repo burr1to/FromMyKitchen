@@ -71,7 +71,7 @@ function Add() {
     form.append("methods", JSON.stringify(data.methods));
     form.append("tags", JSON.stringify(data.tags));
     form.append("size", data.size);
-    form.append("name", a.user.name);
+    form.append("name", data.name);
     form.append("id", a.user._id);
     form.append("photo", fileName);
 

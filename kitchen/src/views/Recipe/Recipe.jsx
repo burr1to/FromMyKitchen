@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "./../../components/Layout/Layout";
 import Image from "../../components/Global/Image";
 import axios from "axios";
@@ -10,6 +10,20 @@ import samay from "./../../assets/samay.png";
 import { useNavigate } from "react-router-dom";
 
 function Recipe() {
+  const [comment, setComment] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetch = async () => {
+      setLoading(true);
+      const res = await axios.get("http://localhost:8800/api/comments");
+      console.log(res.data);
+      setComment(res.data);
+      setLoading(false);
+    };
+
+    fetch();
+  }, []);
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -121,9 +135,7 @@ function Recipe() {
             <span className='text-3xl'>Instructions</span>
           </div>
         </div>
-        <div>
-          <Comment />
-        </div>
+        <div>{loading ? "Loading..." : <Comment comment={comment} />}</div>
       </div>
     </Layout>
   );

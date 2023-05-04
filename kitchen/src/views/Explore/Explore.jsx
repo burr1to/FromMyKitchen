@@ -14,11 +14,9 @@ function Explore() {
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const res = await axios.get(
-        "https://www.themealdb.com/api/json/v1/1/search.php?f=f"
-      );
+      const res = await axios.get("http://localhost:8800/api/recipes");
       console.log(res.data);
-      setData(res.data.meals);
+      setData(res.data);
       setLoading(false);
     };
 
