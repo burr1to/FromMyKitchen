@@ -17,7 +17,7 @@ export const createRecipe = async (req, res, next) => {
       methods: JSON.parse(req.body.methods),
       tags: JSON.parse(req.body.tags),
       userID: req.body.id,
-      photo: req.body.photo,
+      photo: "damn",
     });
 
     await recipe.save();

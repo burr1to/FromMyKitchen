@@ -3,7 +3,7 @@ import Image from "./Image";
 
 function ExploreBox({ item, loading, status }) {
   if (loading) {
-    return "";
+    return "Loading...";
   } else {
     if (status === "search")
       return (

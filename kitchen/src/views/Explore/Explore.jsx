@@ -17,7 +17,7 @@ function Explore() {
       const res = await axios.get(
         "https://www.themealdb.com/api/json/v1/1/search.php?f=f"
       );
-
+      console.log(res.data);
       setData(res.data.meals);
       setLoading(false);
     };
