@@ -59,7 +59,6 @@ function Add() {
     form.append("name", a.user.name);
     form.append("id", a.user._id);
     form.append("photo", fileName);
-    form.append("path");
 
     photoForm.append("name", fileName);
     photoForm.append("file", file);

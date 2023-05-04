@@ -34,7 +34,6 @@ const RecipeSchema = new mongoose.Schema(
     ],
     photo: {
       name: String,
-      path: String,
     },
     methods: [{ method: String }],
 
