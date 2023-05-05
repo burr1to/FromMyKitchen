@@ -8,6 +8,7 @@ import Comment from "../../components/Global/Comment";
 import bread from "./../../assets/bread.jpg";
 import samay from "./../../assets/samay.png";
 import { useNavigate } from "react-router-dom";
+import Favorite from "../../components/Global/Favorite";
 
 function Recipe() {
   const [comment, setComment] = useState([]);
@@ -53,7 +54,11 @@ function Recipe() {
       <div className='my-10 relative max-w-[75%] mx-auto'>
         <div className=''>
           <div className='p-10'>
-            <span className='text-7xl'>Samaya Baji</span>
+            <div className='flex gap-x-10 items-center'>
+              <span className='text-7xl'>Samaya Baji</span>
+              <Favorite />
+            </div>
+
             <p className='my-3 text-[25px]'>Newari Cuisine</p>
             <div>
               <ul>

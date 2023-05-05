@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import Slide from "../../components/HomeSlider/Slide";
 import test from "./../../assets/explore.jpg";
 import Image from "../../components/Global/Image";
+import axios from "axios";
 
 export default function Home() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:8800/api/recipes/get/random"
+        );
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetch();
+  }, []);
   const items = [
     "Chicken Alfredo with White Sauce",
     "Fettucine with Cilantro Dressing",
