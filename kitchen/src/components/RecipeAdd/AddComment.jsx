@@ -8,17 +8,25 @@ function AddComment() {
   const { register, handleSubmit, control, reset } = useForm();
 
   const onSubmit = async (data) => {
-    await axios.post(
-      "http://localhost:8800/api/comments",
-      {
-        userID: user.user._id,
-        name: user.user.username,
-        text: data.text,
-      },
-      {
-        withCredentials: true,
-      }
-    );
+    await axios
+      .post(
+        "http://localhost:8800/api/comments",
+        {
+          userID: user.user._id,
+          name: user.user.username,
+          text: data.text,
+          recipeID: "test",
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     reset();
   };
   return (

@@ -1,9 +1,5 @@
 import Recipe from "../models/Recipe.js";
-import Photo from "../models/Photo.js";
-import multer from "multer";
 import { createError } from "../utils/error.js";
-import path from "path";
-import upload from "../utils/upload.js";
 
 export const createRecipe = async (req, res, next) => {
   try {
@@ -45,7 +41,15 @@ export const getAllRecipes = async (req, res, next) => {
   }
 };
 export const updateRecipe = async (req, res, next) => {};
-export const deleteRecipe = async (req, res, next) => {};
+
+export const deleteRecipe = async (req, res, next) => {
+  const recipe = Recipe.findByIdAndDelete(req.params.id);
+  recipe.save();
+  if (!recipe) {
+    return res.status(404).send("Recipe not found");
+  }
+  res.status(200).send("Recipe Deleted");
+};
 
 export const uploadPhoto = async (req, res, next) => {
   try {
@@ -62,3 +66,16 @@ export const uploadPhoto = async (req, res, next) => {
 //   res.setHeader("Content-Type", "image/jpeg");
 //   res.sendFile(path.join(yo, photo.path));
 // };
+
+export const loveRecipe = async (req, res, next) => {};
+
+export const randomRecipe = async (req, res, next) => {
+  try {
+    const pipeline = [{ $sample: { size: 3 } }];
+    const result = await Recipe.aggregate(pipeline);
+    res.status(200).json(result);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};

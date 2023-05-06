@@ -7,7 +7,7 @@ import {
   FaTwitterSquare,
 } from "react-icons/fa";
 import Image from "./../../components/Global/Image";
-import logo from "./../../assets/illustration.png";
+import logo from "./../../assets/Illustration.png";
 
 export default function Footer() {
   return (
@@ -16,10 +16,10 @@ export default function Footer() {
         <div className='w-full'>
           <Image src={logo} className='object-contain w-[70%] h-auto' />
         </div>
-        <p className='py-4'>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id odit
-          ullam iste repellat consequatur libero reiciendis, blanditiis
-          accusantium.
+        <p className='py-4 text-justify'>
+          FromMyKitchen is a semester project made by kristo, cookiebani, mynus
+          and burrito in hopes of learning a bit about web development and what
+          not.
         </p>
       </div>
       <div className='lg:col-span-2 flex justify-around mt-5'>
@@ -41,8 +41,8 @@ export default function Footer() {
           <ul className='text-black'>
             <li className='py-2 '>Contact Us</li>
             <li className='py-2 '>Our Policies</li>
-            <li className='py-2 '>PepeLaugh</li>
-            <li className='py-2 '>OmegaLul</li>
+            <li className='py-2 '>Copyright Laws</li>
+            <li className='py-2 '>Support</li>
           </ul>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "./../../components/Layout/Layout";
 import Image from "../../components/Global/Image";
 import axios from "axios";
@@ -8,8 +8,23 @@ import Comment from "../../components/Global/Comment";
 import bread from "./../../assets/bread.jpg";
 import samay from "./../../assets/samay.png";
 import { useNavigate } from "react-router-dom";
+import Favorite from "../../components/Global/Favorite";
 
 function Recipe() {
+  const [comment, setComment] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetch = async () => {
+      setLoading(true);
+      const res = await axios.get("http://localhost:8800/api/comments");
+      console.log(res.data);
+      setComment(res.data);
+      setLoading(false);
+    };
+
+    fetch();
+  }, []);
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -39,7 +54,11 @@ function Recipe() {
       <div className='my-10 relative max-w-[75%] mx-auto'>
         <div className=''>
           <div className='p-10'>
-            <span className='text-7xl'>Samaya Baji</span>
+            <div className='flex gap-x-10 items-center'>
+              <span className='text-7xl'>Samaya Baji</span>
+              <Favorite />
+            </div>
+
             <p className='my-3 text-[25px]'>Newari Cuisine</p>
             <div>
               <ul>
@@ -121,9 +140,7 @@ function Recipe() {
             <span className='text-3xl'>Instructions</span>
           </div>
         </div>
-        <div>
-          <Comment />
-        </div>
+        <div>{loading ? "Loading..." : <Comment comment={comment} />}</div>
       </div>
     </Layout>
   );
