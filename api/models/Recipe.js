@@ -22,6 +22,10 @@ const RecipeSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    foodtype: {
+      type: String,
+      required: true,
+    },
     description: {
       type: String,
       required: true,
@@ -30,6 +34,7 @@ const RecipeSchema = new mongoose.Schema(
       {
         name: String,
         quantity: Number,
+        unit: String,
       },
     ],
     photo: {

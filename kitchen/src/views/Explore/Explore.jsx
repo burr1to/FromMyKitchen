@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Pagination from "../../components/Global/Pagination";
 import Layout from "./../../components/Layout/Layout";
 import ExploreBox from "../../components/Global/ExploreBox";
+import Filter from "../../components/Global/Filter";
 
 function Explore() {
   const [data, setData] = useState([]);
@@ -33,10 +34,13 @@ function Explore() {
 
   return (
     <Layout>
-      <div className='flex justify-center my-20'></div>
-      <div className='grid sm:grid-cols-6 md:grid-cols-7 max-w-[85%] mx-auto my-14 '>
-        <div className='col-span-1 flex justify-center'>
-          <span className=''>Filter</span>
+      <div className='flex justify-center text-5xl my-20'>
+        Explore My Kitchen
+      </div>
+      <div className='grid sm:grid-cols-7 md:grid-cols-8 max-w-[90%] mx-auto my-14 '>
+        <div className='col-span-2 relative '>
+          <span className='text-2xl'>Filter Results</span>
+          <Filter />
         </div>
         <div className=' col-span-6 grid sm:grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10'>
           <ExploreBox item={current} loading={loading} />

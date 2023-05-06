@@ -5,8 +5,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import recipeRoute from "./routes/recipe.js";
 import userRoute from "./routes/users.js";
+import filterRoute from "./routes/filter.js";
 import commentRoute from "./routes/comment.js";
-import upload from "./utils/upload.js";
+import favRoute from "./routes/favorite.js";
 import path from "path";
 
 const app = express();
@@ -36,6 +37,8 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/recipes", recipeRoute);
 app.use("/api/users", userRoute);
 app.use("/api/comments", commentRoute);
+app.use("/api/filter", filterRoute);
+app.use("/api/favorite", favRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

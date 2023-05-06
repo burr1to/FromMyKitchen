@@ -10,9 +10,7 @@ export default function Home() {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:8800/api/recipes/get/random"
-        );
+        const res = await axios.get("http://localhost:8800/api/filter/random");
         console.log(res.data);
       } catch (err) {
         console.log(err);

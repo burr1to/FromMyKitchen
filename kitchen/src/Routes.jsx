@@ -7,7 +7,6 @@ import Explore from "./views/Explore/Explore";
 import Recipe from "./views/Recipe/Recipe";
 import Search from "./views/Search/Search";
 import Ingredients from "./views/Search/Ingredients";
-import Test from "./components/RecipeAdd/Test";
 import Register from "./views/Login/Register";
 import Tag from "./views/Search/Tag";
 import Edit from "./components/Profile/Edit";
@@ -17,7 +16,6 @@ export default function Routedpath() {
   return (
     <Routes>
       <Route path='/'>
-        <Route path='test' element={<Test />} />
         <Route index element={<Home />} />
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<Register />} />

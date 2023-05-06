@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "./Image";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ExploreBox({ item, loading, status }) {
   const imgPath = "http://localhost:8800/uploads";

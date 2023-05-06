@@ -13,7 +13,11 @@ function Add() {
   const [image, setImage] = useState([]);
   const a = useContext(AuthContext);
 
-  const { register, handleSubmit, control } = useForm({});
+  const { register, handleSubmit, control } = useForm({
+    defaultValues: {
+      foodtype: "",
+    },
+  });
   const {
     fields: ingFields,
     append: ingAppend,
@@ -74,6 +78,7 @@ function Add() {
     form.append("name", data.name);
     form.append("id", a.user._id);
     form.append("photo", fileName);
+    form.append("type", data.foodtype);
 
     photoForm.append("name", fileName);
     photoForm.append("file", img);
@@ -91,10 +96,7 @@ function Add() {
 
     await axios
       .post("http://localhost:8800/api/recipes", form, {
-        headers: {
-          withCredentials: true,
-          "Content-Type": "multipart/form-data",
-        },
+        withCredentials: true,
       })
       .then((res) => {
         console.log(res);
@@ -117,7 +119,7 @@ function Add() {
                   <p className='my-8 text-4xl'>Add your own personal recipe</p>
                   <label>
                     <span className='text-[color:var(--primary)] text-xl'>
-                      Name
+                      Food Name
                     </span>
                   </label>
                   <input
@@ -162,11 +164,32 @@ function Add() {
                     </span>
                   </label>
                   <input
+                    placeholder='How many people would this dish feed?'
                     id='size'
                     type='number'
                     {...register("size", { required: true, maxLength: 30 })}
                     className='border-0 border-b-2 focus:outline-none border-gray-400'
                   />
+                </div>
+                <div className=' flex flex-col w-full gap-y-4 my-8 '>
+                  <label>
+                    <span className=' text-[color:var(--primary)]  text-xl'>
+                      Food Type
+                    </span>
+                  </label>
+                  <select
+                    className='border-0 py-3 border-b-2 focus:outline-none border-gray-400'
+                    id='type'
+                    {...register("foodtype")}
+                  >
+                    <option value='Mains'>Mains</option>
+                    <option value='Soup'>Soup</option>
+                    <option value='Appetizer'>Appetizer</option>
+                    <option value='Drinks'>Drinks</option>
+                    <option value='Sauces'>Sauces</option>
+                    <option value='Dessert'>Dessert</option>
+                    <option value='Dessert'>Other</option>
+                  </select>
                 </div>
                 <div className=' flex flex-col w-full gap-y-6 my-8 '>
                   <label>
@@ -174,13 +197,15 @@ function Add() {
                       Description
                     </span>
                   </label>
-                  <input
-                    id='size'
+                  <textarea
+                    rows='6'
+                    id='description'
                     type='text'
                     {...register("description", {
                       required: true,
+                      maxLength: 250,
                     })}
-                    className='border-2 px-4 rounded-lg focus:outline-none border-gray-400'
+                    className='border-2 px-4 py-2 rounded-lg focus:outline-none border-gray-400'
                   />
                 </div>
                 <div className='my-7 '>
@@ -195,14 +220,14 @@ function Add() {
                         className='flex gap-5 p-4 items-center'
                         key={field.id}
                       >
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col gap-y-3'>
                           <span>Ingredient</span>
                           <input
                             className='border-0 border-b-2 focus:outline-none border-gray-400'
                             {...register(`ingredients.${index}.name`)}
                           />
                         </div>
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col w-[100px] gap-y-3'>
                           <label>Quantity</label>
                           <input
                             type='number'
@@ -211,6 +236,23 @@ function Add() {
                               valueAsNumber: true,
                             })}
                           />
+                        </div>
+                        <div className='flex flex-col w-[150px] gap-y-3'>
+                          <label>Unit</label>
+                          <select
+                            id='unit'
+                            className='border-0 border-b-2 focus:outline-none border-gray-400 pb-2 pt-1'
+                            {...register(`ingredients.${index}.unit`)}
+                          >
+                            <option value='pieces'>pieces</option>
+                            <option value='tbsps'>tbsps</option>
+                            <option value='pinches'>pinches</option>
+                            <option value='kgs'>kgs</option>
+                            <option value='gs'>gs</option>
+                            <option value='cups'>cups</option>
+                            <option value='mls'>mls</option>
+                            <option value='ls'>ls</option>
+                          </select>
                         </div>
                         <div>
                           <button
