@@ -37,8 +37,8 @@ export default function Navbar() {
   return (
     <div className='flex justify-between items-center max-w-[1360px] mx-auto px-4 relative text-black '>
       <div className='w-full'>
-        <Link to='/'>
-          <Image src={logo} className='object-contain w-[50%] h-auto' />
+        <Link className='' to={"/"}>
+          <Image src={logo} className='w-[50%] h-auto' />
         </Link>
       </div>
 

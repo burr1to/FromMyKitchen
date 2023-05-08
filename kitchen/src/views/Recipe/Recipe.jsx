@@ -25,7 +25,9 @@ function Recipe() {
       const recipe = await axios.get(
         `http://localhost:8800/api/recipes/${currentPath}`
       );
-      const res = await axios.get("http://localhost:8800/api/comments");
+      const res = await axios.get(
+        `http://localhost:8800/api/comments/${currentPath}`
+      );
 
       setData(recipe.data);
       setComment(res.data);
@@ -93,7 +95,7 @@ function Recipe() {
             </div>
           </div>
           <div>
-            <p className='text-justify'>{data.description}</p>
+            <p className='text-justify text-[24px]'>{data.description}</p>
           </div>
           <div className=' py-5 mt-5'>
             <ul className='text-[22px] flex flex-row space-x-12'>
@@ -134,7 +136,13 @@ function Recipe() {
             </ul>
           </div>
         </div>
-        <div>{loading ? "Loading..." : <Comment comment={comment} />}</div>
+        <div>
+          {loading ? (
+            "Loading..."
+          ) : (
+            <Comment comment={comment} path={currentPath} />
+          )}
+        </div>
       </div>
     </Layout>
   );

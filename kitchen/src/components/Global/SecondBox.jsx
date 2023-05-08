@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "./../Global/Image";
 import image from "./../../assets/explore.jpg";
 

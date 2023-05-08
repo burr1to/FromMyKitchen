@@ -24,10 +24,11 @@ function Search() {
 
   const onSubmit = async (data, e) => {
     setLoading(true);
+
     const res = await axios.get(
-      `https://www.themealdb.com/api/json/v1/1/search.php?s=${data.search}`
+      `http://localhost:8800/api/filter/name?search=${data.search}`
     );
-    setData(res.data.meals);
+    setData(res.data);
     console.log("Okasd");
     setLoading(false);
   };

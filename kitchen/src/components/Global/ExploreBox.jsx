@@ -14,11 +14,12 @@ function ExploreBox({ item, loading, status }) {
           {item?.map((element, index) => (
             <div key={index} className='flex items-center w-[95%] mx-auto'>
               <div className='w-[140px] h-auto my-4'>
-                <Image src={element.strMealThumb} className='rounded-lg' />
+                <Image
+                  src={`${imgPath}/${element.photo}`}
+                  className='rounded-lg'
+                />
               </div>
-              <div className='text-center px-5 text-[18px]'>
-                {element.strMeal}
-              </div>
+              <div className='text-center px-5 text-[18px]'>{element.name}</div>
             </div>
           ))}
         </>

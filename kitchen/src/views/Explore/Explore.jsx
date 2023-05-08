@@ -8,6 +8,7 @@ import Filter from "../../components/Global/Filter";
 
 function Explore() {
   const [data, setData] = useState([]);
+  const [filter, setFilter] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
@@ -16,7 +17,6 @@ function Explore() {
     const fetch = async () => {
       setLoading(true);
       const res = await axios.get("http://localhost:8800/api/recipes");
-      console.log(res.data);
       setData(res.data);
       setLoading(false);
     };

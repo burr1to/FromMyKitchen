@@ -15,7 +15,7 @@ export const createComment = async (req, res, next) => {
 
 export const getComments = async (req, res, next) => {
   try {
-    const comments = await Comment.find();
+    const comments = await Comment.find({ recipeID: req.params.id });
     res.status(200).json(comments);
   } catch (err) {
     createError("404", "Cannot get recipes");

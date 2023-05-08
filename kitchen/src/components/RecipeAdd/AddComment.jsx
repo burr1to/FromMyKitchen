@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
-function AddComment() {
+function AddComment({ path }) {
   const user = useContext(AuthContext);
 
   const { register, handleSubmit, control, reset } = useForm();
@@ -15,7 +15,7 @@ function AddComment() {
           userID: user.user._id,
           name: user.user.username,
           text: data.text,
-          recipeID: "test",
+          recipeID: path,
         },
         {
           withCredentials: true,

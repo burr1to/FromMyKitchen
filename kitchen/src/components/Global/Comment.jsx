@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import AddComment from "../RecipeAdd/AddComment";
 
-function Comment({ comment }) {
+function Comment({ comment, path }) {
   return (
     <div>
       <div className=' mx-auto'>
@@ -19,7 +19,7 @@ function Comment({ comment }) {
       </div>
 
       <div>
-        <AddComment />
+        <AddComment path={path} />
       </div>
     </div>
   );
