@@ -7,8 +7,10 @@ import axios from "axios";
 function Ingredients() {
   const [val, setVal] = useState([""]);
 
+  const [data, setData] = useState([])
+
   const handleAdd = () => {
-    if (val.length < 7) {
+    if (val.length < 3) {
       const add = [...val, []];
       setVal(add);
     }
@@ -26,16 +28,30 @@ function Ingredients() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(val)
     try {
-      const response = await axios.post("http://localhost:8800/ingredients", {
-        ingredients: val,
-      });
-      console.log(response.data);
+      if (val.length === 0) {
+        console.log("No data to search from")
+      } else if (val.length === 1) {
+        const response = await axios.get(`http://localhost:8800/api/filter/ing?ing1=${val[0]}`)
+        console.log(response.data)
+        setData(response.data)
+      } else if (val.length === 2) {
+        const response = await axios.get(`http://localhost:8800/api/filter/ing?ing1=${val[0]}&ing2=${val[1]}`)
+        setData(response.data)
+      } else if (val.length === 3) {
+
+        const response = await axios.get(`http://localhost:8800/api/filter/ing?ing1=${val[0]}&ing2=${val[1]}&ing3=${val[2]}`)
+        setData(response.data)
+      } else {
+        console.log("Fuck u")
+      }
+
     } catch (err) {
       console.log(err);
     }
   };
-  console.log(val);
+
   return (
     <Layout>
       <div className="grid grid-cols-2">
@@ -119,8 +135,8 @@ function Ingredients() {
             </div>
           </div>
         </div>
-        <div className="relative inset-y-0 right-0 -mr-32">
-          <Image src={ingredient} className="transform rotate-45" />
+        <div className="relative">
+                
         </div>
       </div>
     </Layout>

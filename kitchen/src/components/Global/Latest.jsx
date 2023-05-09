@@ -1,14 +1,26 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SecondBox from "./SecondBox";
-
+import axios from "axios";
 function Latest() {
-  useEffect(() => {}, []);
+  const [latest, setLatest] = useState([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const fetch = async () => {
+      setLoading(true);
+      const latestData = await axios.get(
+        "http://localhost:8800/api/filter/latest"
+      );
+
+      setLatest(latestData.data);
+      setLoading(false);
+    };
+
+    fetch();
+  }, []);
+
   return (
-    <div className='grid grid-cols-4 gap-x-5'>
-      <SecondBox />
-      <SecondBox />
-      <SecondBox />
-      <SecondBox />
+    <div className="my-12s">
+      <SecondBox data={latest} loading={loading} />
     </div>
   );
 }
