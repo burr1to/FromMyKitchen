@@ -44,7 +44,7 @@ export const getAllRecipes = async (req, res, next) => {
   }
 };
 
-export const updateRecipe = async (req, res, next) => {};
+export const updateRecipe = async (req, res, next) => { };
 
 export const deleteRecipe = async (req, res, next) => {
   const recipe = Recipe.findByIdAndDelete(req.params.id);
@@ -63,6 +63,19 @@ export const uploadPhoto = async (req, res, next) => {
   }
 };
 
-export const loveRecipe = async (req, res, next) => {};
+export const searchFromIngredients = async (req, res, next) => {
+  // const { ingredient1 } = req.query;
+  try {
+    const recipes = await Recipe.find();
+    const filter = recipes.filter(recipe => {
+      return recipe.ingredients.some(ingredient => ingredient.name === "Chicken" || ingredient.name === "Noodles")
+    })
 
-export const latestRecipe = async (req, res, next) => {};
+    res.status(200).json(filter)
+
+  } catch (err) {
+
+    console.log(err);
+    next(err);
+  }
+};
