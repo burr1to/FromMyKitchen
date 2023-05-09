@@ -6,12 +6,14 @@ import Image from "../../components/Global/Image";
 import axios from "axios";
 
 export default function Home() {
+  const imgPath = "http://localhost:8800/uploads";
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetch = async () => {
       try {
         const res = await axios.get("http://localhost:8800/api/filter/random");
-        console.log(res.data);
+
+        setData(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -34,16 +36,17 @@ export default function Home() {
           </span>
         </div>
         <div className='grid grid-cols-4 w-full max-w-[80%] mx-auto mb-28 mt-8 gap-8'>
-          {items.map((item, index) => (
+          {data?.map((item, index) => (
             <div className='col-span-1 flex flex-col items-center' key={index}>
               <div>
                 <Image
-                  src={test}
+                  src={`${imgPath}/${item.photo}`}
                   className='w-[400px] h-auto rounded-t-[20px]'
+                  alt='asdasd'
                 />
               </div>
               <div className='p-6 text-[22px] text-center rounded-b-[20px] border border-[color:var(--primary)]'>
-                {item}
+                {item.name}
               </div>
             </div>
           ))}
