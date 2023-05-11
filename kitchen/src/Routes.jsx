@@ -33,6 +33,7 @@ export default function Routedpath() {
 
         <Route path='explore'>
           <Route index element={<Explore />} />
+
           <Route path=':recipeID' element={<Recipe />} />
         </Route>
 

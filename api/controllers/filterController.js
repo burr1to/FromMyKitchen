@@ -1,6 +1,6 @@
 import Recipe from "../models/Recipe.js";
 
-export const filterbyType = () => { };
+export const filterbyType = () => {};
 
 export const randomRecipe = async (req, res, next) => {
   try {
@@ -45,19 +45,30 @@ export const filterbyLatest = async (req, res, next) => {
   }
 };
 
+export const filterSingleIng = async (req, res, next) => {
+  const { ingredient } = req.query;
+  try {
+  } catch (error) {
+    console.log(err);
+    next(err);
+  }
+};
 
 export const filterbyIng = async (req, res, next) => {
   const { ing1, ing2, ing3 } = req.query;
   try {
     const recipes = await Recipe.find();
-    const filter = recipes.filter(recipe => {
-      return recipe.ingredients.some(ingredient => ingredient.name === ing1 || ingredient.name === ing2 || ingredient.name === ing3)
-    })
+    const filter = recipes.filter((recipe) => {
+      return recipe.ingredients.some(
+        (ingredient) =>
+          ingredient.name === ing1 ||
+          ingredient.name === ing2 ||
+          ingredient.name === ing3
+      );
+    });
 
-    res.status(200).json(filter)
-
+    res.status(200).json(filter);
   } catch (err) {
-
     console.log(err);
     next(err);
   }

@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import Pagination from "../../components/Global/Pagination";
 import Layout from "./../../components/Layout/Layout";
 import ExploreBox from "../../components/Global/ExploreBox";
-import Filter from "../../components/Global/Filter";
 
 function Explore() {
   const [initdata, setInitData] = useState([]);
@@ -13,11 +12,20 @@ function Explore() {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
-  const { register, handleSubmit, control } = useForm({
+  const {
+    register,
+    handleSubmit,
+    control,
+    watch,
+    reset,
+    formState: { isSubmitted },
+  } = useForm({
     defaultValues: {
       filterType: "",
     },
   });
+
+  const watchedFields = watch(["filterName"]);
 
   useEffect(() => {
     const fetch = async () => {
@@ -40,6 +48,24 @@ function Explore() {
 
   const onSubmit = async (data) => {
     console.log(data);
+    if (data.filterType !== "") {
+      console.log("yay");
+    } else if (data.filterName !== "") {
+      const res = await axios.get(
+        `http://localhost:8800/api/filter/name?search=${data.filterName}`
+      );
+      console.log(res.data);
+      setFilter(res.data);
+    } else {
+      const res = await axios.get("http://localhost:8800/api/recipes");
+
+      setFilter(res.data);
+    }
+    reset();
+
+    // const res = await axios.get(
+    //   `http://localhost:8800/api/recipes?data=${data}`
+    // );
     // setData(null);
   };
 
@@ -121,7 +147,11 @@ function Explore() {
           </div>
         </div>
         <div className=' col-span-6 grid sm:grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10'>
-          <ExploreBox item={current} loading={loading} />
+          {isSubmitted ? (
+            <ExploreBox item={filter} loading={loading} />
+          ) : (
+            <ExploreBox item={current} loading={loading} />
+          )}
         </div>
       </div>
       <div className='my-10 flex justify-center max-w-[100%]'>
