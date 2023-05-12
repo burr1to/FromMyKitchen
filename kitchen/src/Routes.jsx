@@ -27,13 +27,13 @@ export default function Routedpath() {
 
         <Route path='recipes'>
           <Route index element={<Search />} />
-          <Route path='ingredients' element={<Ingredients />} />
+
           <Route path='add' element={<Add />} />
         </Route>
 
         <Route path='explore'>
           <Route index element={<Explore />} />
-
+          <Route path='ingredients' element={<Ingredients />} />
           <Route path=':recipeID' element={<Recipe />} />
         </Route>
 

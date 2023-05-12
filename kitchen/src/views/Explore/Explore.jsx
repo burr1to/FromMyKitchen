@@ -40,7 +40,7 @@ function Explore() {
 
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
-  const current = initdata.slice(firstIndex, lastIndex);
+  let current = initdata.slice(firstIndex, lastIndex);
 
   const paginate = (pageNumber, e) => {
     setCurrentPage(pageNumber);
@@ -49,24 +49,32 @@ function Explore() {
   const onSubmit = async (data) => {
     console.log(data);
     if (data.filterType !== "") {
-      console.log("yay");
+      const res = await axios.get(
+        `http://localhost:8800/api/filter/type?type=${data.filterType}`
+      );
+      setFilter(res.data);
     } else if (data.filterName !== "") {
       const res = await axios.get(
         `http://localhost:8800/api/filter/name?search=${data.filterName}`
       );
-      console.log(res.data);
+      setFilter(res.data);
+    } else if (data.filterIngredient !== "") {
+      const res = await axios.get(
+        `http://localhost:8800/api/filter/single?ing=${data.filterIngredient}`
+      );
+      setFilter(res.data);
+    } else if (data.filterTag !== "") {
+      const res = await axios.get(
+        `http://localhost:8800/api/filter/tag?s=${data.filterTag}`
+      );
       setFilter(res.data);
     } else {
       const res = await axios.get("http://localhost:8800/api/recipes");
 
       setFilter(res.data);
     }
-    reset();
 
-    // const res = await axios.get(
-    //   `http://localhost:8800/api/recipes?data=${data}`
-    // );
-    // setData(null);
+    reset();
   };
 
   return (

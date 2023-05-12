@@ -6,7 +6,7 @@ import food from "./../../assets/explore.jpg";
 import Comment from "../../components/Global/Comment";
 import bread from "./../../assets/bread.jpg";
 import samay from "./../../assets/samay.png";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Favorite from "../../components/Global/Favorite";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -46,8 +46,6 @@ function Recipe() {
     setOpen(true);
   };
 
-  const navigate = useNavigate();
-
   return (
     <Layout>
       <div className='my-10 relative max-w-[75%] mx-auto'>
@@ -65,11 +63,8 @@ function Recipe() {
                   <li
                     className='cursor-pointer inline-block border mx-1 px-4 border-gray-300 rounded-lg'
                     key={index}
-                    onClick={() => {
-                      navigate(`/${tag.tag}`, { state: { tag } });
-                    }}
                   >
-                    #{tag.tag}
+                    <Link to={`/${tag.tag}`}> #{tag.tag}</Link>
                   </li>
                 ))}
               </ul>

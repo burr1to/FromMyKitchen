@@ -16,6 +16,7 @@ function Add() {
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
       foodtype: "",
+      culture: "",
     },
   });
   const {
@@ -79,6 +80,7 @@ function Add() {
     form.append("id", a.user._id);
     form.append("photo", fileName);
     form.append("type", data.foodtype);
+    form.append("culture", data.culture);
 
     photoForm.append("name", fileName);
     photoForm.append("file", img);
@@ -189,6 +191,27 @@ function Add() {
                     <option value='Sauces'>Sauces</option>
                     <option value='Dessert'>Dessert</option>
                     <option value='Dessert'>Other</option>
+                  </select>
+                </div>
+                <div className=' flex flex-col w-full gap-y-4 my-8 '>
+                  <label>
+                    <span className=' text-[color:var(--primary)]  text-xl'>
+                      Ethnic Group
+                    </span>
+                  </label>
+                  <select
+                    className='border-0 py-3 border-b-2 focus:outline-none border-gray-400'
+                    id='culture'
+                    {...register("culture")}
+                  >
+                    <option value='Newari'>Newari</option>
+                    <option value='Gurung'>Gurung</option>
+                    <option value='Lama'>Lama</option>
+                    <option value='Magar'>Magar</option>
+                    <option value='Sherpa'>Sherpa</option>
+                    <option value='Lama'>Lama</option>
+                    <option value='Foreign'>Foreign</option>
+                    <option value='Other'>Other</option>
                   </select>
                 </div>
                 <div className=' flex flex-col w-full gap-y-6 my-8 '>

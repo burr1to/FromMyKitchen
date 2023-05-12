@@ -19,7 +19,7 @@ function Latest() {
   }, []);
 
   return (
-    <div className="my-12s">
+    <div className='my-12'>
       <SecondBox data={latest} loading={loading} />
     </div>
   );

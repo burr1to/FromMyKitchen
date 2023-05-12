@@ -14,6 +14,7 @@ export const createRecipe = async (req, res, next) => {
       userID: req.body.id,
       photo: req.body.photo,
       foodtype: req.body.type,
+      culture: req.body.culture,
     });
 
     await recipe.save();
@@ -44,7 +45,7 @@ export const getAllRecipes = async (req, res, next) => {
   }
 };
 
-export const updateRecipe = async (req, res, next) => { };
+export const updateRecipe = async (req, res, next) => {};
 
 export const deleteRecipe = async (req, res, next) => {
   const recipe = Recipe.findByIdAndDelete(req.params.id);

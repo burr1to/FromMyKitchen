@@ -27,6 +27,11 @@ const RecipeSchema = new mongoose.Schema(
       required: true,
     },
 
+    culture: {
+      type: String,
+      requited: true,
+    },
+
     description: {
       type: String,
       required: true,
