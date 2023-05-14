@@ -1,11 +1,12 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Layout from "../../components/Layout/Layout";
 import icon from "../../assets/update-icon.png";
 import pp from "../../assets/pp.jpeg";
 import ExploreBox from "../../components/Global/ExploreBox";
 import axios from "axios";
 import Image from "../../components/Global/Image";
+import { AuthContext } from "../../context/AuthContext";
 
 function Profile() {
   const [imageUrl, setImageUrl] = useState(pp);
@@ -13,22 +14,17 @@ function Profile() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const user = useContext(AuthContext);
+
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      // const res = await axios.get(
-      //   "https://www.themealdb.com/api/json/v1/1/search.php?f=f"
-      // );
 
-      // setData(res.data.meals);
       setLoading(false);
     };
 
     fetch();
   }, []);
-
-  const favorite = data.slice(0, 2);
-  const uploaded = data.slice(3, 5);
 
   return (
     <Layout>
@@ -78,13 +74,13 @@ function Profile() {
         <hr className='border my-6 border-[color:var(--secondary)]' />
         <h2 className='text-2xl mb-6 mt-3'>Favorited Recipes</h2>
         <div className=' col-span-6 grid sm:grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-10'>
-          <ExploreBox item={favorite} loading={loading} />
+          {/* <ExploreBox item={favorite} loading={loading} /> */}
         </div>
         <hr className='border mt-12 mb-6 border-[color:var(--secondary)]' />
         <h2 className=' text-2xl mb-6 mt-3'>Uploaded Recipes</h2>
         <div className='mb-20'>
           <div className=' grid sm:grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-10'>
-            <ExploreBox item={uploaded} loading={loading} />
+            {/* <ExploreBox item={uploaded} loading={loading} /> */}
           </div>
         </div>
       </div>

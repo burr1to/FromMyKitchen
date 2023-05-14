@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Layout from "../../components/Layout/Layout";
 import Slide from "../../components/HomeSlider/Slide";
-
+import imgPath from "./../../context/utils";
 import Image from "../../components/Global/Image";
 import axios from "axios";
 
 export default function Home() {
-  const imgPath = "http://localhost:8800/uploads";
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetch = async () => {
@@ -35,7 +34,7 @@ export default function Home() {
             <div className='col-span-1 flex flex-col ' key={index}>
               <div>
                 <Image
-                  src={`${imgPath}/${item.photo}`}
+                  src={`${imgPath[0]}/${item.photo}`}
                   className='w-[100%] rounded-t-[20px] object-cover'
                   alt='asdasd'
                 />

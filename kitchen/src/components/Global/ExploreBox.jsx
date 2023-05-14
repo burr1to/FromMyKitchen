@@ -1,12 +1,23 @@
 import React from "react";
 import Image from "./Image";
+import path from "./../../context/utils";
 import { Link, useNavigate } from "react-router-dom";
+import BarLoader from "react-spinners/BarLoader";
 
 function ExploreBox({ item, loading, status }) {
-  const imgPath = "http://localhost:8800/uploads";
-  const nextPath = "http://localhost:5173/explore";
   if (loading) {
-    return "Loading...";
+    return (
+      <div className='flex justify-center'>
+        <BarLoader
+          color={"orange"}
+          loading={loading}
+          width='1000px'
+          height='10px'
+          aria-label='Loading Spinner'
+          data-testid='loader'
+        />
+      </div>
+    );
   } else {
     if (status === "search")
       return (
@@ -15,7 +26,7 @@ function ExploreBox({ item, loading, status }) {
             <div key={index} className='flex items-center w-[95%] mx-auto'>
               <div className='w-[140px] h-auto my-4'>
                 <Image
-                  src={`${imgPath}/${element.photo}`}
+                  src={`${path[0]}/${element.photo}`}
                   className='rounded-lg'
                 />
               </div>
@@ -29,15 +40,15 @@ function ExploreBox({ item, loading, status }) {
         <>
           {item?.map((element, index) => (
             <Link
-              to={`${nextPath}/${element._id}`}
+              to={`${path[1]}/${element._id}`}
               key={index}
-              className='border border-[color:var(--primary)] rounded-[25px] flex flex-col'
+              className='border border-[color:var(--primary)] rounded-[25px] flex flex-col justify-center'
             >
               <div className='w-[90%] h-auto p-4 mx-auto'>
                 <Image
-                  src={`${imgPath}/${element.photo}`}
+                  src={`${path[0]}/${element.photo}`}
                   alt='wtf'
-                  className='rounded-[30px]'
+                  className='rounded-[30px] w-[400px] h-auto'
                 />
               </div>
 

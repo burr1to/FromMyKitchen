@@ -18,21 +18,26 @@ export default function Navbar() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .post(
-        "http://localhost:8800/api/users/logout",
-        {},
-        {
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        dispatch({ type: "LOGOUT" });
-        navigate("/login");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    if (!user) {
+      navigate("/login");
+    } else {
+      await axios
+        .post(
+          "http://localhost:8800/api/users/logout",
+          {},
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          dispatch({ type: "LOGOUT" });
+          navigate("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
   return (
     <div className='flex justify-between items-center max-w-[1360px] mx-auto px-4 relative text-black '>
@@ -43,14 +48,20 @@ export default function Navbar() {
       </div>
 
       <ul className='hidden md:flex flex-row-reverse items-center w-full'>
-        <li onClick={handleSubmit} className='p-4 cursor-pointer'>
-          Logout
-        </li>
+        {user ? (
+          <li onClick={handleSubmit} className='p-4 cursor-pointer'>
+            Logout
+          </li>
+        ) : (
+          <li onClick={handleSubmit} className='p-4 cursor-pointer'>
+            Login
+          </li>
+        )}
 
         <li className='p-4 cursor-pointer'>Add Recipe</li>
         <li className='p-4 cursor-pointer'>Our Kitchen</li>
         <li className='px-4 py-3 cursor-pointer border border-[color:var(--primary)] rounded-lg'>
-          <Link to='/explore'>Start Here</Link>
+          <Link to='/recipes'>Start Here</Link>
         </li>
       </ul>
       <div onClick={handleNav} className='block md:hidden'>

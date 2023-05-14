@@ -1,8 +1,8 @@
 import Image from "./../Global/Image";
 import { Link } from "react-router-dom";
+import imgPath from "./../../context/utils";
 
 function SecondBox({ data, loading }) {
-  const imgPath = "http://localhost:8800/uploads";
   return (
     <>
       {loading ? (
@@ -17,7 +17,7 @@ function SecondBox({ data, loading }) {
             >
               <div>
                 <Image
-                  src={`${imgPath}/${single.photo}`}
+                  src={`${imgPath[0]}/${single.photo}`}
                   className='w-[85%] mx-auto object-cover rounded-lg'
                 />
               </div>

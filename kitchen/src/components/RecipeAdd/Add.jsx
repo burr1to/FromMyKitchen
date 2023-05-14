@@ -206,12 +206,12 @@ function Add() {
                   >
                     <option value='Newari'>Newari</option>
                     <option value='Gurung'>Gurung</option>
-                    <option value='Lama'>Lama</option>
-                    <option value='Magar'>Magar</option>
                     <option value='Sherpa'>Sherpa</option>
-                    <option value='Lama'>Lama</option>
+                    <option value='Tharu'>Tharu</option>
+                    <option value='Mid Western'>Mid Western</option>
+                    <option value='Far Western'>Far Western</option>
+                    <option value='Nepali'>Nepali</option>
                     <option value='Foreign'>Foreign</option>
-                    <option value='Other'>Other</option>
                   </select>
                 </div>
                 <div className=' flex flex-col w-full gap-y-6 my-8 '>

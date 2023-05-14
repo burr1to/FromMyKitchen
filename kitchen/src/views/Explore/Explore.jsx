@@ -16,7 +16,6 @@ function Explore() {
     register,
     handleSubmit,
     control,
-    watch,
     reset,
     formState: { isSubmitted },
   } = useForm({
@@ -24,8 +23,6 @@ function Explore() {
       filterType: "",
     },
   });
-
-  const watchedFields = watch(["filterName"]);
 
   useEffect(() => {
     const fetch = async () => {
@@ -69,9 +66,7 @@ function Explore() {
       );
       setFilter(res.data);
     } else {
-      const res = await axios.get("http://localhost:8800/api/recipes");
-
-      setFilter(res.data);
+      setFilter(initdata);
     }
 
     reset();

@@ -33,6 +33,14 @@ export const getSingleRecipe = async (req, res, next) => {
   }
 };
 
+export const getUserRecipe = async (req, res, next) => {
+  try {
+    const recipe = await Recipe.find({ userID: req.params.id });
+    res.status(200).json(recipe);
+  } catch (error) {
+    res.status(400).send(err);
+  }
+};
 export const getAllRecipes = async (req, res, next) => {
   const { limit, ...others } = req.query;
   try {

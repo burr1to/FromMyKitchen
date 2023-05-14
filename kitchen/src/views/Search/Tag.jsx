@@ -2,20 +2,33 @@ import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
 import { useLocation } from "react-router-dom";
 import ExploreBox from "../../components/Global/ExploreBox";
+import axios from "axios";
+import Explore from "../Explore/Explore";
 
 function Tag() {
-  const [tag, setTag] = useState();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await axios.get(
+        `http://localhost:8800/api/filter/tag?s=${
+          window.location.pathname.split("/")[2]
+        }`
+      );
+      setData(res.data);
+    };
+    fetch();
+  }, []);
+  console.log(data);
+  const tag = window.location.pathname.split("/")[1];
 
-  console.log(window.location.pathname.split("/")[1]);
   return (
     <Layout>
-      {tag ? (
-        <div className='flex justify-center my-20'>
-          <span className='text-3xl'>Recipes with the tag: asd </span>
+      <div className=' my-20'>
+        <div className='text-3xl text-center'>Recipes with the tag: </div>
+        <div className='my-10 flex justify-center gap-x-5'>
+          <ExploreBox item={data} status={"tag"} />
         </div>
-      ) : (
-        "What the fuck"
-      )}
+      </div>
     </Layout>
   );
 }

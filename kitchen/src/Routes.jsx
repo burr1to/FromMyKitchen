@@ -11,6 +11,7 @@ import Register from "./views/Login/Register";
 import Tag from "./views/Search/Tag";
 import Edit from "./components/Profile/Edit";
 import Profile from "./views/Profile/Profile";
+import Update from "./components/RecipeAdd/Update";
 
 export default function Routedpath() {
   return (
@@ -22,22 +23,21 @@ export default function Routedpath() {
 
         <Route path='profile'>
           <Route path=':id' element={<Profile />} />
-          <Route path='edit' element={<Edit />} />
+          <Route path=':id/edit' element={<Edit />} />
         </Route>
 
         <Route path='recipes'>
           <Route index element={<Search />} />
-
           <Route path='add' element={<Add />} />
+          <Route path=':tag' element={<Tag />} />
         </Route>
 
         <Route path='explore'>
           <Route index element={<Explore />} />
           <Route path='ingredients' element={<Ingredients />} />
           <Route path=':recipeID' element={<Recipe />} />
+          <Route path=':recipeID/update' element={<Update />} />
         </Route>
-
-        <Route path=':tag' element={<Tag />} />
       </Route>
     </Routes>
   );

@@ -30,6 +30,7 @@ function Recipe() {
       );
 
       setData(recipe.data);
+
       setComment(res.data);
       setLoading(false);
     };
@@ -64,7 +65,7 @@ function Recipe() {
                     className='cursor-pointer inline-block border mx-1 px-4 border-gray-300 rounded-lg'
                     key={index}
                   >
-                    <Link to={`/${tag.tag}`}> #{tag.tag}</Link>
+                    <Link to={`/recipes/${tag.tag}`}> #{tag.tag}</Link>
                   </li>
                 ))}
               </ul>
@@ -130,8 +131,19 @@ function Recipe() {
               ))}
             </ul>
           </div>
+          {data.userID === user.user._id ? (
+            <Link
+              to={"update"}
+              className='flex justify-center py-2 px-4 border border-[color:var(--secondary)] active:bg-[color:var(--secondary)] active:text-white rounded-lg hover:bg-[color:var(--secondary)] hover:text-white cursor-pointer text-xl'
+            >
+              Update your recipe
+            </Link>
+          ) : (
+            ""
+          )}
         </div>
         <div>
+          <h1 className='my-14 text-3xl'>Comments</h1>
           {loading ? (
             "Loading..."
           ) : (
