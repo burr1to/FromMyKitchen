@@ -22,24 +22,24 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className=''>
+      <div className="">
         <Slide />
-        <div className='text-center mt-20 mb-9'>
-          <span className='text-[32px] text-[color:var(--primary)]'>
+        <div className="text-center mt-20 mb-9">
+          <span className="text-[32px] text-[color:var(--primary)]">
             Our Recipes you might love
           </span>
         </div>
-        <div className='md:flex w-full max-w-[74%] mx-auto mb-28 mt-8 gap-10'>
+        <div className="md:flex w-full max-w-[74%] mx-auto mb-28 mt-8 gap-10">
           {data?.map((item, index) => (
-            <div className='col-span-1 flex flex-col ' key={index}>
+            <div className="col-span-1 flex flex-col " key={index}>
               <div>
                 <Image
                   src={`${imgPath[0]}/${item.photo}`}
-                  className='w-[100%] rounded-t-[20px] object-cover'
-                  alt='asdasd'
+                  className="w-[100%] rounded-t-[20px] object-cover"
+                  alt="asdasd"
                 />
               </div>
-              <div className='p-6 text-[20px] text-center rounded-b-[20px] border border-[color:var(--primary)]'>
+              <div className="p-6 text-center rounded-b-[20px] border-t-0 border border-[color:var(--primary)]">
                 {item.name}
               </div>
             </div>

@@ -8,20 +8,20 @@ function SecondBox({ data, loading }) {
       {loading ? (
         "Loading.."
       ) : (
-        <div className='flex justify-center items-center gap-x-5'>
+        <div className="grid grid-cols-2">
           {data.map((single, index) => (
             <Link
               to={`/explore/${single._id}`}
-              className='flex md:flex-col justify-center items-center gap-y-5'
+              className="gap-y-5 py-4"
               key={index}
             >
               <div>
                 <Image
                   src={`${imgPath[0]}/${single.photo}`}
-                  className='w-[85%] mx-auto object-cover rounded-lg'
+                  className="w-[65%] mx-auto object-cover rounded-lg"
                 />
               </div>
-              <div className='text-xl '>{single.name}</div>
+              <div className="text-[20px] text-center py-3">{single.name}</div>
             </Link>
           ))}
         </div>
