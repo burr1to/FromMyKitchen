@@ -44,7 +44,7 @@ export default function Home() {
                   alt='asdasd'
                 />
               </div>
-              <div className='p-6 text-[20px] text-center rounded-b-[20px] border border-[color:var(--primary)]'>
+              <div className='p-6 text-center rounded-b-[20px] border-t-0 border border-[color:var(--primary)]'>
                 {item.name}
               </div>
             </Link>

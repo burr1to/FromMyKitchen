@@ -34,6 +34,7 @@ function ExploreBox({ item, loading, status }) {
                   className='rounded-lg'
                 />
               </div>
+
               <div className='text-center px-5 text-[18px]'>{element.name}</div>
             </Link>
           ))}
@@ -80,7 +81,7 @@ function ExploreBox({ item, loading, status }) {
                 />
               </div>
 
-              <div className='text-[] text-center my-4 px-2 text-[22px]'>
+              <div className='text-center my-4 px-2 text-[18px]'>
                 {element.name}
               </div>
             </Link>

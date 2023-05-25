@@ -3,8 +3,8 @@ import SecondBox from "./SecondBox";
 
 function IngResults({ data, loading }) {
   return (
-    <div className=''>
-      {loading ? "Loading" : <SecondBox data={data} type={"ingredient"} />}
+    <div className="border border-[color:var(--primary)]] rounded-lg my-4">
+      <SecondBox data={data} type={"ingredient"} loading={loading} />
     </div>
   );
 }

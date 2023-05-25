@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import Layout from "./../../components/Layout/Layout";
 import Image from "../../components/Global/Image";
+
 import axios from "axios";
 import food from "./../../assets/explore.jpg";
 import Comment from "../../components/Global/Comment";
@@ -117,6 +118,7 @@ function Recipe() {
                 ))}
               </ul>
             </div>
+
             <div className='my-16'>
               <span className='text-3xl'>Instructions</span>
               <ul className='text-[19px] my-5'>
