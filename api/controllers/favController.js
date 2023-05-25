@@ -16,6 +16,7 @@ export const getFavorite = async (req, res, next) => {
       recipeID: req.params.id1,
       userID: req.params.id2,
     });
+    res.status(200).send(recipe);
   } catch (error) {
     next(error);
   }
@@ -36,7 +37,6 @@ export const deleteFavorite = async (req, res, next) => {
     next(error);
   }
 };
-// export const getFavorite =
 
 export const getUserFavorites = async (req, res, next) => {
   try {

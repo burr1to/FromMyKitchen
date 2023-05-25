@@ -63,7 +63,7 @@ export const updateUser = async (req, res, next) => {
   const allowedUpdates = ["name", "username", "email", "profilePicture"];
   const id = req.params.id;
 
-  const isValid = updates.every((update) => allowedUpdates.includes(update));
+  const isValid = updates.some((update) => allowedUpdates.includes(update));
 
   if (!isValid) {
     return res.status(400).send({ error: "Invalid" });
@@ -80,6 +80,17 @@ export const updateUser = async (req, res, next) => {
     });
   } catch (error) {
     console.log("Error");
+    next(error);
+  }
+};
+
+export const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id).select(
+      "email name username profilePicture"
+    );
+    res.status(200).send(user);
+  } catch (error) {
     next(error);
   }
 };

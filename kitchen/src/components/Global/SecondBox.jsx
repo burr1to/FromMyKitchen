@@ -10,7 +10,9 @@ function SecondBox({ data, loading, status }) {
       ) : (
         <div
           className={
-            status === "latest" ? "grid grid-cols-4" : "grid grid-cols-3"
+            status === "latest"
+              ? "grid grid-cols-4 gap-x-4"
+              : "grid grid-cols-3"
           }
         >
           {data.map((single, index) => (
@@ -22,10 +24,10 @@ function SecondBox({ data, loading, status }) {
               <div>
                 <Image
                   src={`${imgPath[0]}/${single.photo}`}
-                  className='w-[65%] mx-auto object-cover rounded-lg'
+                  className='w-[300px] mx-auto object-cover rounded-[20px]'
                 />
               </div>
-              <div className='text-[20px] text-center py-3'>{single.name}</div>
+              <div className='text-[22px] text-center py-4'>{single.name}</div>
             </Link>
           ))}
         </div>

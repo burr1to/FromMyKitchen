@@ -1,10 +1,12 @@
 import React from "react";
 import ingredient from "./../../assets/upload.png";
 import Image from "../../components/Global/Image";
+import login_img from "./../../assets/login-ingredient.png";
 import logo from "./../../assets/Illustration.png";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Register() {
   const { register, handleSubmit, control, reset } = useForm();
@@ -20,83 +22,115 @@ function Register() {
       .catch((err) => {
         console.log(err);
       });
+    reset();
   };
 
   return (
-    <div className='grid grid-cols-3 h-[100vh] max-h-[100vh]'>
-      <div className='relative'>
-        <div className='w-[80%] mx-auto'>
-          <Image src={logo} className='w-[300px]' />
+    <div className='flex h-screen'>
+      <div className='w-2/5 bg-[#FF9B0017] relative'>
+        <div className='h-full'>
+          <img
+            src={login_img}
+            alt='Image'
+            className='object-cover h-full ml-50 mt-12'
+            style={{ minWidth: "115%" }}
+          />
+          <div className='absolute top-0 left-0 p-10'>
+            <Link to='/'>
+              <img
+                src={logo}
+                alt='Logo'
+                className='logo-image ml-20 -mt-10'
+                style={{ height: "115px", width: "230px" }}
+              />
+            </Link>
+          </div>
         </div>
-        <div>Image</div>
       </div>
-      <div className='col-span-2 mx-auto w-[60%] flex flex-col justify-evenly'>
-        <div>
-          <span>Sign Up</span>
-        </div>
-
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <section className='flex w-full space-x-5 justify-evenly'>
-            <div className='flex flex-col w-full'>
-              <label>
-                <span className='text-xl'>Full Name</span>
-              </label>
-              <input
-                type='text'
-                id='name'
-                className=''
-                {...register("name", { required: true, maxLength: 30 })}
-              />
+      <div className='w-3/5 flex flex-col justify-center items-center'>
+        <div className='w-2/3'>
+          <h2 className='text-4xl font-bold mb-10'>Sign Up</h2>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='flex mb-6'>
+              <div className='w-1/2 mr-4'>
+                <label
+                  htmlFor='full-name'
+                  className='block text-gray-700 text-xl font-bold mb-2'
+                >
+                  Full Name
+                </label>
+                <input
+                  type='text'
+                  id='full-name'
+                  className='w-full px-3 py-2 rounded-md bg-[#F2EEE8] border-none text-lg focus:ring-0'
+                  {...register("name", { required: true, maxLength: 30 })}
+                />
+              </div>
+              <div className='w-1/2 ml-4'>
+                <label
+                  htmlFor='username'
+                  className='block text-gray-700 text-xl font-bold mb-2'
+                >
+                  Username
+                </label>
+                <input
+                  type='text'
+                  id='username'
+                  className='w-full px-3 py-2 rounded-md bg-[#F2EEE8] border-none text-lg focus:ring-0'
+                  {...register("username", {
+                    required: true,
+                    maxLength: 30,
+                  })}
+                />
+              </div>
             </div>
-            <div className='flex flex-col w-full'>
-              <label>
-                <span className='text-xl '>Username</span>
-              </label>
-              <input
-                type='text'
-                id='username'
-                className=''
-                {...register("username", {
-                  required: true,
-                  maxLength: 30,
-                })}
-              />
-            </div>
-          </section>
-          <section className='flex w-full space-x-5 justify-evenly'>
-            <div className='flex flex-col w-full'>
-              <label>
-                <span className='text-xl'>Email Address</span>
+            <div className='mb-6'>
+              <label
+                htmlFor='email'
+                className='block text-gray-700 text-xl font-bold mb-2'
+              >
+                Email
               </label>
               <input
                 type='email'
                 id='email'
-                className=''
+                className='w-full px-3 py-2 rounded-md bg-[#F2EEE8] border-none text-lg focus:ring-0'
                 {...register("email", { required: true, maxLength: 30 })}
               />
             </div>
-          </section>
-          <section className='flex w-full space-x-5 justify-evenly'>
-            <div className='flex flex-col w-full'>
-              <label>
-                <span className='text-xl'>Password</span>
+            <div className='mb-6'>
+              <label
+                htmlFor='password'
+                className='block text-gray-700 text-xl font-bold mb-2'
+              >
+                Password
               </label>
               <input
                 type='password'
                 id='password'
-                className=''
+                className='w-full px-3 py-2 rounded-md bg-[#F2EEE8] border-none text-lg focus:ring-0'
                 {...register("password", {
                   required: true,
                   maxLength: 30,
-                  minLength: { value: 8, message: "8 characters minimum!!!" },
                 })}
               />
             </div>
-          </section>
-
-          <button>Create Account</button>
-        </form>
-        <div>Already have an account? Log In</div>
+            <div className='flex justify-between items-center mb-6'>
+              <div className='text-gray-700 text-2xl absolute top-0 right-0 mt-5 mr-8 '>
+                Already have an account? {""}
+                <Link to='/login' className='text-[#FF9B00]'>
+                  Login
+                </Link>
+              </div>
+              <button
+                type='submit'
+                className='bg-[#FF9B00] text-white py-2 px-6 rounded-md text-xl font-bold'
+              >
+                Create Account
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

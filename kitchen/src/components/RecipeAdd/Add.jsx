@@ -3,17 +3,18 @@ import Layout from "../Layout/Layout";
 import Image from "../Global/Image";
 import upload from "./../../assets/upload.png";
 import { useState, useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { BiUpload } from "react-icons/bi";
+import { AuthContext } from "../../context/AuthContext";
 
 function Add() {
   const [loading, setLoading] = useState(false);
   const [img, setImg] = useState(null);
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState(null);
+
   const a = useContext(AuthContext);
 
-  const { register, handleSubmit, control } = useForm({
+  const { register, handleSubmit, control, reset } = useForm({
     defaultValues: {
       foodtype: "",
       culture: "",
@@ -48,20 +49,12 @@ function Add() {
 
   const handleChange = (e) => {
     setImg(e.target.files[0]);
-
-    const imgFile = e.target.files;
-    const imgArray = Array.from(imgFile);
-
-    const showPreview = imgArray.map((file) => {
-      return URL.createObjectURL(file);
-    });
-
-    setImage(showPreview);
+    setImage(URL.createObjectURL(e.target.files[0]));
   };
 
-  const handleDelete = (element) => {
-    setImage(image.filter((e) => e !== element));
-    URL.revokeObjectURL(element);
+  const handleDelete = (img) => {
+    setImg(null);
+    setImage(null);
   };
 
   const onSubmit = async (data) => {
@@ -106,6 +99,8 @@ function Add() {
       .catch((err) => {
         console.log(err);
       });
+
+    reset();
   };
 
   if (loading) {
@@ -416,21 +411,23 @@ function Add() {
                       onChange={handleChange}
                       className='border-0 outline-0 hidden'
                     />
-                    <div className='my-10 border border-gray-100'>
-                      {image &&
-                        image.map((element, index) => {
-                          return (
-                            <div key={index}>
-                              <Image
-                                src={element}
-                                className='w-[400px] h-auto max-w-[800px] object-cover'
-                              />
-                              <button onClick={() => handleDelete(element)}>
-                                Delete
-                              </button>
-                            </div>
-                          );
-                        })}
+                    <div className='my-10'>
+                      <div>
+                        <Image
+                          src={image}
+                          className='w-[400px] h-auto max-w-[800px] object-cover'
+                        />
+                        {img ? (
+                          <button
+                            className='my-2 border border-gray-300 px-4 py-1 rounded-lg'
+                            onClick={handleDelete}
+                          >
+                            Delete
+                          </button>
+                        ) : (
+                          ""
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

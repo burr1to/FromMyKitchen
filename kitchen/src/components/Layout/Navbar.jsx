@@ -53,7 +53,7 @@ export default function Navbar() {
         </Link>
       </div>
 
-      <ul className='hidden md:flex flex-row-reverse items-center justify-start gap-x-6 w-full'>
+      <ul className='hidden md:flex flex-row-reverse items-center justify-start gap-x-6 w-full text-[18px]'>
         {user ? (
           <li onClick={handleSubmit} className='p-4 cursor-pointer'>
             Logout

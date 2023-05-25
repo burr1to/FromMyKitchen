@@ -53,7 +53,42 @@ export const getAllRecipes = async (req, res, next) => {
   }
 };
 
-export const updateRecipe = async (req, res, next) => {};
+export const updateRecipe = async (req, res, next) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = [
+    "name",
+    "description",
+    "foodtype",
+    "culture",
+    "ptime",
+    "ctime",
+    "size",
+  ];
+
+  const isValid = updates.some((update) => allowedUpdates.includes(update));
+
+  if (!isValid) {
+    return res.status(400).send({ error: "Invalid" });
+  }
+
+  try {
+    const updatedRecipe = await Recipe.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    return res.json({
+      message: "Recipe updated successfully",
+    });
+  } catch (error) {
+    console.log("Error");
+    next(error);
+  }
+};
 
 export const deleteRecipe = async (req, res, next) => {
   const recipe = Recipe.findByIdAndDelete(req.params.id);

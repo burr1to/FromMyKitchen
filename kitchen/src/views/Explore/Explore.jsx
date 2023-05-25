@@ -74,7 +74,7 @@ function Explore() {
 
   return (
     <Layout>
-      <div className='flex justify-center text-5xl my-20'>
+      <div className='max-w-[90%] mx-auto text-5xl my-20'>
         Explore My Kitchen
       </div>
       <div className='grid sm:grid-cols-7 md:grid-cols-8 max-w-[90%] mx-auto my-14 '>
@@ -149,7 +149,7 @@ function Explore() {
             </form>
           </div>
         </div>
-        <div className=' col-span-6 grid sm:grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10'>
+        <div className=' col-span-6 '>
           {isSubmitted ? (
             <ExploreBox item={filter} loading={loading} />
           ) : (

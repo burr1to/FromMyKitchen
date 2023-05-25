@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import Image from "./Image";
 import path from "./../../context/utils";
 import { Link, useNavigate } from "react-router-dom";
-import BarLoader from "react-spinners/BarLoader";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function ExploreBox({ item, loading, status }) {
   if (loading) {
     return (
-      <div className='flex justify-center'>
-        <BarLoader
+      <div className='flex justify-center w-[100%] items-center'>
+        <ClipLoader
           color={"orange"}
           loading={loading}
           width='100%'
@@ -66,7 +66,7 @@ function ExploreBox({ item, loading, status }) {
       );
     else
       return (
-        <div className='grid grid-cols-4 space-x-5'>
+        <div className='grid grid-cols-4 space-x-5 '>
           {item?.map((element, index) => (
             <Link
               to={`${path[1]}/${element._id}`}

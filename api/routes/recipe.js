@@ -18,5 +18,6 @@ router.post("/photo", upload.single("file"), uploadPhoto);
 router.get("/:id", getSingleRecipe);
 router.get("/", getAllRecipes);
 router.get("/user/:id", getUserRecipe);
+router.patch("/:id", updateRecipe);
 
 export default router;

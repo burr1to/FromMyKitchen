@@ -6,11 +6,13 @@ import pp from "./../../assets/pp.jpeg";
 import { AuthContext } from "../../context/AuthContext";
 import { BiUpload } from "react-icons/bi";
 import Image from "../Global/Image";
+import { useNavigate } from "react-router-dom";
 
 function Edit() {
+  const navigate = useNavigate();
   const currentUser = useContext(AuthContext);
-
-  const { register, handleSubmit, control } = useForm({});
+  const [loading, setLoading] = useState(false);
+  const { register, handleSubmit, control, reset } = useForm({});
   const [img, setImg] = useState(null);
   const [pre, setPre] = useState(null);
   const handleChange = (e) => {
@@ -29,7 +31,7 @@ function Edit() {
 
     photoForm.append("name", fileName);
     photoForm.append("file", img);
-
+    setLoading(true);
     await axios
       .post("http://localhost:8800/api/recipes/photo", photoForm, {
         withCredentials: true,
@@ -55,7 +57,12 @@ function Edit() {
         withCredentials: true,
       }
     );
+    setLoading(false);
+    reset();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    navigate(`${window.location.pathname.split("ed")[0]}`);
   };
+
   return (
     <Layout>
       {currentUser.user !== null ? (

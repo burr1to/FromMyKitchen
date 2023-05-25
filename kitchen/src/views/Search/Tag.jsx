@@ -19,14 +19,14 @@ function Tag() {
     fetch();
   }, []);
   console.log(data);
-  const tag = window.location.pathname.split("/")[1];
+  const tag = window.location.pathname.split("/")[2];
 
   return (
     <Layout>
       <div className=' my-20'>
-        <div className='text-3xl text-center'>Recipes with the tag: </div>
-        <div className='my-10 flex justify-center gap-x-5'>
-          <ExploreBox item={data} status={"tag"} />
+        <div className='text-3xl text-center'>Recipes with the tag: #{tag}</div>
+        <div className='my-10 max-w-[90%] mx-auto gap-x-5'>
+          <ExploreBox item={data} status='tag' />
         </div>
       </div>
     </Layout>
