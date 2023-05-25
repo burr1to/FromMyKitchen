@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { BsHeartFill } from "react-icons/bs";
 import axios from "axios";
 
-function Favorite({ path, user }) {
+function Favorite({ path, user, data }) {
   const [click, setClick] = useState(false);
 
   const handleClick = (e) => {
@@ -15,6 +15,8 @@ function Favorite({ path, user }) {
         {
           userID: user._id,
           recipeID: path,
+          photo: data.photo,
+          name: data.name,
         },
         { withCredentials: true }
       );

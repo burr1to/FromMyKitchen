@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "../Global/Image";
 import slide from "./../../assets/homepage.png";
+import { Link } from "react-router-dom";
 function Slide() {
   return (
     <div className='grid grid-cols-5 text-[color:var(--primary)]'>
@@ -13,7 +14,7 @@ function Slide() {
             FromMyKitchen has recipes for all.
           </p>
           <button className='border border-[color:var(--primary)] rounded-lg p-3'>
-            Explore Recipes
+            <Link to='/explore'>Explore Recipes</Link>
           </button>
         </div>
       </div>

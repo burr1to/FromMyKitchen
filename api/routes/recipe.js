@@ -6,6 +6,7 @@ import {
   updateRecipe,
   deleteRecipe,
   uploadPhoto,
+  getUserRecipe,
 } from "../controllers/recipeController.js";
 import { verifyUser, verify, verifyAdmin } from "../utils/verify.js";
 import upload from "./../utils/upload.js";
@@ -16,7 +17,6 @@ router.post("/", verify, upload.single("file"), createRecipe);
 router.post("/photo", upload.single("file"), uploadPhoto);
 router.get("/:id", getSingleRecipe);
 router.get("/", getAllRecipes);
-// router.put()
-// router.delete()
+router.get("/user/:id", getUserRecipe);
 
 export default router;

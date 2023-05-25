@@ -2,13 +2,17 @@ import Image from "./../Global/Image";
 import { Link } from "react-router-dom";
 import imgPath from "./../../context/utils";
 
-function SecondBox({ data, loading }) {
+function SecondBox({ data, loading, status }) {
   return (
     <>
       {loading ? (
         "Loading.."
       ) : (
-        <div className='flex justify-center items-center gap-x-5'>
+        <div
+          className={
+            status === "latest" ? "grid grid-cols-4" : "grid grid-cols-3"
+          }
+        >
           {data.map((single, index) => (
             <Link
               to={`/explore/${single._id}`}

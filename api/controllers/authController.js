@@ -40,8 +40,6 @@ export const login = async (req, res, next) => {
     res
       .cookie("access_token", token, {
         httpOnly: true,
-        secure: false,
-        maxAge: 60000000,
       })
       .status(200)
       .json({ ...otherDetails }); //to protect password and admin status
@@ -53,16 +51,35 @@ export const login = async (req, res, next) => {
 export const logout = async (req, res, next) => {
   try {
     res.clearCookie("access_token");
+
     res.status(200).send("Log out");
   } catch (err) {
     next(err);
   }
 };
 
-export const getCookie = async (req, res, next) => {
+export const updateUser = async (req, res, next) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ["name", "username", "email", "profilePicture"];
+  const id = req.params.id;
+
+  const isValid = updates.every((update) => allowedUpdates.includes(update));
+
+  if (!isValid) {
+    return res.status(400).send({ error: "Invalid" });
+  }
+
   try {
-    console.log(req.cookies.access_token);
+    const updatedUser = await User.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    return res.json({
+      message: "User updated successfully",
+    });
   } catch (error) {
+    console.log("Error");
     next(error);
   }
 };

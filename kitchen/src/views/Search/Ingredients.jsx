@@ -129,7 +129,11 @@ function Ingredients() {
         </div>
         <div className='relative'>
           <div className='text-2xl p-2 mb-5 text-center'>Search Results</div>
-          {submitted ? <IngResults loading={loading} data={data} /> : ""}
+          {submitted ? (
+            <IngResults loading={loading} data={data} status='ingredients' />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </Layout>

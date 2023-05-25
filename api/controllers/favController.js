@@ -37,3 +37,12 @@ export const deleteFavorite = async (req, res, next) => {
   }
 };
 // export const getFavorite =
+
+export const getUserFavorites = async (req, res, next) => {
+  try {
+    const favorites = await Favorite.find({ userID: req.params.id });
+    res.status(200).send(favorites);
+  } catch (error) {
+    next(error);
+  }
+};

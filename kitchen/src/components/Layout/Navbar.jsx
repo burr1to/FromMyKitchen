@@ -1,5 +1,10 @@
 import { React, useState, useContext } from "react";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import {
+  AiOutlineClose,
+  AiOutlineMenu,
+  AiOutlineLogin,
+  AiOutlineLogout,
+} from "react-icons/ai";
 import Image from "./../../components/Global/Image";
 import logo from "./../../assets/Illustration.png";
 import axios from "axios";
@@ -32,6 +37,7 @@ export default function Navbar() {
         )
         .then((res) => {
           dispatch({ type: "LOGOUT" });
+          sessionStorage.clear();
           navigate("/login");
         })
         .catch((err) => {
@@ -47,7 +53,7 @@ export default function Navbar() {
         </Link>
       </div>
 
-      <ul className='hidden md:flex flex-row-reverse items-center w-full'>
+      <ul className='hidden md:flex flex-row-reverse items-center justify-start gap-x-6 w-full'>
         {user ? (
           <li onClick={handleSubmit} className='p-4 cursor-pointer'>
             Logout
@@ -57,9 +63,14 @@ export default function Navbar() {
             Login
           </li>
         )}
+        <li className='p-4 cursor-pointer'>
+          <Link to={user ? `/profile/${user._id}` : "/login"}>
+            Your Profile
+          </Link>
+        </li>
 
-        <li className='p-4 cursor-pointer'>Add Recipe</li>
-        <li className='p-4 cursor-pointer'>Our Kitchen</li>
+        <li className='p-4 cursor-pointer'>Add your recipe</li>
+
         <li className='px-4 py-3 cursor-pointer border border-[color:var(--primary)] rounded-lg'>
           <Link to='/recipes'>Start Here</Link>
         </li>
@@ -79,8 +90,13 @@ export default function Navbar() {
         </h1>
         <ul className='uppercase p-4'>
           <li className='p-4 border-b border-gray-600'>Recipes</li>
-          <li className='p-4 border-b border-gray-600'>About Us</li>
+
           <li className='p-4 border-b border-gray-600'>Explore</li>
+          {user ? (
+            <li className='p-4 border-b border-gray-600'>Logout</li>
+          ) : (
+            <li className='p-4 border-b border-gray-600'>Login</li>
+          )}
           <li className='p-4 border-b border-gray-600'>Log Out</li>
         </ul>
       </div>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import Layout from "../../components/Layout/Layout";
 import Slide from "../../components/HomeSlider/Slide";
-import imgPath from "./../../context/utils";
+import path from "./../../context/utils";
 import Image from "../../components/Global/Image";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -31,10 +32,14 @@ export default function Home() {
         </div>
         <div className='md:flex w-full max-w-[74%] mx-auto mb-28 mt-8 gap-10'>
           {data?.map((item, index) => (
-            <div className='col-span-1 flex flex-col ' key={index}>
+            <Link
+              to={`${path[1]}/${item._id}`}
+              className='col-span-1 flex flex-col '
+              key={index}
+            >
               <div>
                 <Image
-                  src={`${imgPath[0]}/${item.photo}`}
+                  src={`${path[0]}/${item.photo}`}
                   className='w-[100%] rounded-t-[20px] object-cover'
                   alt='asdasd'
                 />
@@ -42,7 +47,7 @@ export default function Home() {
               <div className='p-6 text-[20px] text-center rounded-b-[20px] border border-[color:var(--primary)]'>
                 {item.name}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
