@@ -15,13 +15,13 @@ function Home() {
         <Navbar />
         <div className='widgets'>
           <Widget type='user' />
-          <Widget type='order' />
+          <Widget type='recipes' />
           <Widget type='earning' />
           <Widget type='balance' />
         </div>
         <div className='charts'>
           <Featured />
-          <Chart title='Revenue for the last 6 months' aspect={2 / 1} />
+          <Chart title='Number of recipes by month' aspect={2 / 1} />
         </div>
         <div className='listContainer'>
           <div className='listTitle'>Latest Transactions</div>

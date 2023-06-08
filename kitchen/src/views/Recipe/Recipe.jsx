@@ -73,26 +73,28 @@ function Recipe() {
               </ul>
             </div>
 
-            <div className='my-5'>
-              <Image
-                src={`${path[0]}/${data.photo}`}
-                alt='No Image Found'
-                className='min-w-[600px] rounded-lg'
-              />
+            <div className='grid grid-cols-2 gap-6 my-4'>
+              <div>
+                <Image
+                  src={`${path[0]}/${data.photo}`}
+                  alt='No Image Found'
+                  className='max-w-[640px] max-h-[600px] rounded-lg'
+                />
+              </div>
+
+              <div className='py-4'>
+                <p className='text-justify text-[24px]'>{data.description}</p>
+                <ul className='text-[22px] flex space-x-12 my-6'>
+                  <li className='border border-[color:var(--secondary)] bg-[color:var(--secondary)] py-2 px-5 rounded-lg'>
+                    Prep Time: {data.pTime} mins
+                  </li>
+                  <li className=' border border-[color:var(--secondary)] bg-[color:var(--secondary)] py-2 px-5 rounded-lg'>
+                    Cook Time: {data.cTime} mins
+                  </li>
+                </ul>
+              </div>
+              <div></div>
             </div>
-          </div>
-          <div>
-            <p className='text-justify text-[24px]'>{data.description}</p>
-          </div>
-          <div className=' py-5 mt-5'>
-            <ul className='text-[22px] flex flex-row space-x-12'>
-              <li className='border border-[color:var(--secondary)] bg-[color:var(--secondary)] py-2 px-5 rounded-lg'>
-                Prep Time: {data.pTime} mins
-              </li>
-              <li className=' border border-[color:var(--secondary)] bg-[color:var(--secondary)] py-2 px-5 rounded-lg'>
-                Cook Time: {data.cTime} mins
-              </li>
-            </ul>
           </div>
 
           <div className='my-16 max-w-[20%]'>

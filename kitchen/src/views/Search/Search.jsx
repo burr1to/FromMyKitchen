@@ -24,10 +24,12 @@ function Search() {
   const onSubmit = async (data, e) => {
     setLoading(true);
 
-    const res = await axios.get(
-      `http://localhost:8800/api/filter/name?search=${data.search}`
-    );
-    setData(res.data);
+    if (data.search !== "") {
+      const res = await axios.get(
+        `http://localhost:8800/api/filter/name?search=${data.search}`
+      );
+      setData(res.data);
+    }
 
     setLoading(false);
   };
@@ -53,13 +55,13 @@ function Search() {
           {hidden ? (
             ""
           ) : (
-            <div className=' w-[90%] rounded-lg mx-auto absolute mt-1 z-10 bg-white shadow'>
+            <div className=' w-[90%] rounded-lg mx-auto absolute mt-1 z-10 bg-white shadow-md'>
               <ExploreBox item={data} loading={loading} status='search' />
             </div>
           )}
         </div>
 
-        <div className='my-12 flex justify-center items-center text-center gap-x-16 max-w-[50%]'>
+        <div className='my-12 flex justify-center items-center text-center gap-x-16 max-w-[50%] border-2 border-[color:var(--primary)] py-10 px-2 rounded-[20px]'>
           <Link
             to='/explore'
             className='text-2xl hover:underline cursor-pointer hover:text-[color:var(--primary)]'
@@ -80,7 +82,7 @@ function Search() {
           </Link>
         </div>
       </div>
-      <div className='max-w-[70%] mx-auto my-15'>
+      <div className='max-w-[70%] mx-auto my-15 '>
         <h1 className='my-14 text-3xl text-center'>Latest Uploaded Recipes</h1>
         <Latest />
       </div>

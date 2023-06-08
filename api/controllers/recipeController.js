@@ -42,11 +42,8 @@ export const getUserRecipe = async (req, res, next) => {
   }
 };
 export const getAllRecipes = async (req, res, next) => {
-  const { limit, ...others } = req.query;
   try {
-    const recipes = await Recipe.find({ ...others })
-      .limit(parseInt(limit))
-      .select("name photo _id");
+    const recipes = await Recipe.find().select("name _id photo");
     res.status(200).json(recipes);
   } catch (err) {
     res.send(400).send(err);

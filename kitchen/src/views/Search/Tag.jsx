@@ -23,9 +23,9 @@ function Tag() {
 
   return (
     <Layout>
-      <div className=' my-20'>
+      <div className='my-20'>
         <div className='text-3xl text-center'>Recipes with the tag: #{tag}</div>
-        <div className='my-10 max-w-[90%] mx-auto gap-x-5'>
+        <div className='my-10 max-w-[70%] mx-auto gap-x-5'>
           <ExploreBox item={data} status='tag' />
         </div>
       </div>

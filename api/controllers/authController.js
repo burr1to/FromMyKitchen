@@ -94,3 +94,12 @@ export const getUser = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find().select("name _id profilePicture");
+    res.status(200).json(users);
+  } catch (err) {
+    next(err);
+  }
+};

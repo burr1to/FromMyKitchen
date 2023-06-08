@@ -16,15 +16,11 @@ function SecondBox({ data, loading, status }) {
           }
         >
           {data.map((single, index) => (
-            <Link
-              to={`/explore/${single._id}`}
-              className='gap-y-5 py-4'
-              key={index}
-            >
+            <Link to={`/explore/${single._id}`} className='py-4' key={index}>
               <div>
                 <Image
                   src={`${imgPath[0]}/${single.photo}`}
-                  className='w-[300px] mx-auto object-cover rounded-[20px]'
+                  className='w-[400px] h-[240px] mx-auto object-cover rounded-[20px]'
                 />
               </div>
               <div className='text-[22px] text-center py-4'>{single.name}</div>

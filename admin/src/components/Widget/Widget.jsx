@@ -31,11 +31,11 @@ function Widget({ type }) {
         ),
       };
       break;
-    case "order":
+    case "recipes":
       data = {
-        title: "ORDERS",
+        title: "RECIPES",
         isMoney: false,
-        link: "View all orders",
+        link: "View all recipes",
         icon: (
           <ShoppingCartOutlinedIcon
             className='icon'
@@ -87,7 +87,11 @@ function Widget({ type }) {
         <span className='counter'>
           {data.isMoney && "$"} {amount}
         </span>
-        <span className='link'>{data.link}</span>
+        {type === "user" || type === "recipes" ? (
+          <span className='link'>{data.link}</span>
+        ) : (
+          ""
+        )}
       </div>
       <div className='right'>
         <div className='percentage positive'>
