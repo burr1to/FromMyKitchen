@@ -58,7 +58,8 @@ function Recipe() {
               )}
             </div>
 
-            <p className='my-3 text-[25px]'>Newari Cuisine</p>
+            <p className='my-3 text-[25px]'>{data.culture} Cuisine</p>
+
             <div>
               <ul>
                 {data.tags?.map((tag, index) => (

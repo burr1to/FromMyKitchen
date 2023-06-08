@@ -99,8 +99,10 @@ function Add() {
       .catch((err) => {
         console.log(err);
       });
-
+    setImg(null);
+    setImage(null);
     reset();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (loading) {
@@ -221,7 +223,7 @@ function Add() {
                     type='text'
                     {...register("description", {
                       required: true,
-                      maxLength: 250,
+                      maxLength: 500,
                     })}
                     className='border-2 px-4 py-2 rounded-lg focus:outline-none border-gray-400'
                   />

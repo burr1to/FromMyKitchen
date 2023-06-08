@@ -79,7 +79,7 @@ function Explore() {
       </div>
       <div className='grid sm:grid-cols-7 md:grid-cols-8 max-w-[90%] mx-auto my-14 '>
         <div className='col-span-2 relative '>
-          <span className='text-2xl'>Filter Results</span>
+          <span className='text-2xl'>Filter</span>
           <div className='my-7 max-w-[80%]'>
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* Name */}
@@ -144,7 +144,12 @@ function Explore() {
                 </select>
               </div>
               <div>
-                <button type='Submit'>Filter</button>
+                <button
+                  type='Submit'
+                  className=' text-white bg-[color:var(--primary)] py-1 px-3 rounded-lg'
+                >
+                  Filter
+                </button>
               </div>
             </form>
           </div>

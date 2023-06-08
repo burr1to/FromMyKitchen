@@ -69,7 +69,9 @@ export default function Navbar() {
           </Link>
         </li>
 
-        <li className='p-4 cursor-pointer'>Add your recipe</li>
+        <li className='p-4 cursor-pointer'>
+          <Link to={user ? `/recipes/add` : "/login"}>Add your recipe</Link>
+        </li>
 
         <li className='px-4 py-3 cursor-pointer border border-[color:var(--primary)] rounded-lg'>
           <Link to='/recipes'>Start Here</Link>

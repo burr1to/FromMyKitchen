@@ -66,7 +66,7 @@ function ExploreBox({ item, loading, status }) {
       );
     else
       return (
-        <div className='grid grid-cols-4 space-x-5 '>
+        <div className='grid grid-cols-4 space-x-5 gap-y-8'>
           {item?.map((element, index) => (
             <Link
               to={`${path[1]}/${element._id}`}
