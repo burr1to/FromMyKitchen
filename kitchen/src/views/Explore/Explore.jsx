@@ -11,7 +11,7 @@ function Explore() {
   const [filter, setFilter] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6);
+  const [itemsPerPage] = useState(8);
   const {
     register,
     handleSubmit,
@@ -74,87 +74,87 @@ function Explore() {
 
   return (
     <Layout>
-      <div className='max-w-[90%] mx-auto text-5xl my-20'>
+      <div className='max-w-[90%] mx-auto text-5xl my-8'>
         Explore My Kitchen
       </div>
-      <div className='grid sm:grid-cols-7 md:grid-cols-8 max-w-[90%] mx-auto my-14 '>
-        <div className='col-span-2 relative '>
-          <span className='text-2xl'>Filter</span>
-          <div className='my-7 max-w-[80%]'>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              {/* Name */}
-              <div className='flex flex-col gap-y-3 my-5'>
-                <label>
-                  <span className='text-[color:var(--primary)] text-xl'>
-                    Filter by name
-                  </span>
-                </label>
-                <input
-                  type='text'
-                  id='filterName'
-                  className=' focus:outline-none border-gray-400 rounded-lg'
-                  {...register("filterName", { maxLength: 30 })}
-                />
-              </div>
-              {/* Tag */}
-              <div className='flex flex-col gap-y-3 my-5'>
-                <label>
-                  <span className='text-[color:var(--primary)] text-xl'>
-                    Filter by tag
-                  </span>
-                </label>
-                <input
-                  type='text'
-                  id='filterTag'
-                  className=' focus:outline-none border-gray-400 rounded-lg'
-                  {...register("filterTag", { maxLength: 10 })}
-                />
-              </div>
+      <div className='flex flex-col'>
+        <div className=''>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='flex flex-col md:flex-row gap-x-5 md:items-center justify-evenly max-w-[80%] mx-auto my-7'
+          >
+            {/* Name */}
+            <div className='flex flex-col gap-y-3 my-5 w-full'>
+              <label>
+                <span className='text-[color:var(--primary)] text-xl'>
+                  Filter by name
+                </span>
+              </label>
+              <input
+                type='text'
+                id='filterName'
+                className=' focus:outline-none border-gray-400 rounded-lg'
+                {...register("filterName", { maxLength: 30 })}
+              />
+            </div>
+            {/* Tag */}
+            <div className='flex flex-col gap-y-3 my-5 w-full'>
+              <label>
+                <span className='text-[color:var(--primary)] text-xl'>
+                  Filter by tag
+                </span>
+              </label>
+              <input
+                type='text'
+                id='filterTag'
+                className=' focus:outline-none border-gray-400 rounded-lg'
+                {...register("filterTag", { maxLength: 10 })}
+              />
+            </div>
 
-              <div className='flex flex-col gap-y-3 my-5'>
-                <label>
-                  <span className='text-[color:var(--primary)] text-xl'>
-                    Filter by ingredient
-                  </span>
-                </label>
-                <input
-                  type='text'
-                  id='filterIngredient'
-                  className=' focus:outline-none border-gray-400 rounded-lg'
-                  {...register("filterIngredient", { maxLength: 30 })}
-                />
-              </div>
+            <div className='flex flex-col gap-y-3 my-5 w-full'>
+              <label>
+                <span className='text-[color:var(--primary)] text-xl'>
+                  Filter by ingredient
+                </span>
+              </label>
+              <input
+                type='text'
+                id='filterIngredient'
+                className=' focus:outline-none border-gray-400 rounded-lg'
+                {...register("filterIngredient", { maxLength: 30 })}
+              />
+            </div>
 
-              <div className='flex flex-col gap-y-3 my-5'>
-                <label>
-                  <span className='text-[color:var(--primary)] text-xl'>
-                    Filter by type
-                  </span>
-                </label>
-                <select
-                  className='border border-gray-400 px-1 py-1 rounded-lg'
-                  {...register("filterType")}
-                >
-                  <option value='Soup'>Soup</option>
-                  <option value='Appetizer'>Appetizer</option>
-                  <option value='Mains'>Mains</option>
-                  <option value='Drinks'>Drinks</option>
-                  <option value='Sauces'>Sauces</option>
-                  <option value='Dessert'>Dessert</option>
-                </select>
-              </div>
-              <div>
-                <button
-                  type='Submit'
-                  className=' text-white bg-[color:var(--primary)] py-1 px-3 rounded-lg'
-                >
-                  Filter
-                </button>
-              </div>
-            </form>
-          </div>
+            <div className='flex flex-col gap-y-3 my-5 w-full'>
+              <label>
+                <span className='text-[color:var(--primary)] text-xl'>
+                  Filter by type
+                </span>
+              </label>
+              <select
+                className='border border-gray-400 px-2 py-1 rounded-lg'
+                {...register("filterType")}
+              >
+                <option value='Soup'>Soup</option>
+                <option value='Appetizer'>Appetizer</option>
+                <option value='Mains'>Mains</option>
+                <option value='Drinks'>Drinks</option>
+                <option value='Sauces'>Sauces</option>
+                <option value='Dessert'>Dessert</option>
+              </select>
+            </div>
+            <div>
+              <button
+                type='Submit'
+                className=' text-white text-[18px] mx-4 bg-[color:var(--primary)] py-1 px-6 rounded-lg'
+              >
+                Filter
+              </button>
+            </div>
+          </form>
         </div>
-        <div className=' col-span-6 '>
+        <div className='p-8 max-w-[90%] mx-auto '>
           {isSubmitted ? (
             <ExploreBox item={filter} loading={loading} />
           ) : (

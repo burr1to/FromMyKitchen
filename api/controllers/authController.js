@@ -103,3 +103,64 @@ export const getAllUsers = async (req, res, next) => {
     next(err);
   }
 };
+
+export const setFavorite = async (req, res, next) => {
+  const userID = req.params.id1;
+  const recipeID = req.params.id2;
+
+  try {
+    const addFavorite = await User.findByIdAndUpdate(
+      userID,
+      {
+        $push: { favorites: recipeID },
+      },
+      { new: true }
+    );
+    return res.json("Favorited!");
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const removeFavorite = async (req, res, next) => {
+  const userID = req.params.id1;
+  const recipeID = req.params.id2;
+
+  try {
+    const removeFavorite = await User.findByIdAndUpdate(
+      userID,
+      {
+        $pull: { favorites: recipeID },
+      },
+      { new: true }
+    );
+    return res.json("Favorited!");
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const checkFavorite = async (req, res, next) => {
+  const userID = req.params.id1;
+  const recipeID = req.params.id2;
+
+  try {
+    const favorite = await User.find({
+      _id: userID,
+      favorites: { $elemMatch: { $eq: recipeID } },
+    });
+
+    res.status(200).send(favorite);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getFavorites = async (req, res, next) => {
+  const userID = req.params.id;
+  try {
+    const favorites = User.find({ _id: userID }).select("favorites");
+  } catch (error) {
+    next(error);
+  }
+};

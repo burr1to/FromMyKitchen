@@ -61,7 +61,7 @@ function Search() {
           )}
         </div>
 
-        <div className='my-12 flex justify-center items-center text-center gap-x-16 max-w-[50%] border-2 border-[color:var(--primary)] py-10 px-2 rounded-[20px]'>
+        <div className='my-12 flex justify-center items-center text-center gap-x-16 max-w-[50%] py-10 px-2 rounded-[20px]'>
           <Link
             to='/explore'
             className='text-2xl hover:underline cursor-pointer hover:text-[color:var(--primary)]'

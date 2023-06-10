@@ -14,12 +14,16 @@ function Add() {
 
   const a = useContext(AuthContext);
 
-  const { register, handleSubmit, control, reset } = useForm({
+  const { register, handleSubmit, control, reset, formState } = useForm({
     defaultValues: {
       foodtype: "",
       culture: "",
     },
   });
+
+  const { isDirty, isValid, touchedFields, dirtyFields } = formState;
+
+  console.log({ touchedFields, dirtyFields, isDirty, isValid });
   const {
     fields: ingFields,
     append: ingAppend,
@@ -58,51 +62,49 @@ function Add() {
   };
 
   const onSubmit = async (data) => {
-    const photoForm = new FormData();
-    const fileName = Date.now() + img.name;
-
-    const form = new FormData();
-    form.append("ctime", data.ctime);
-    form.append("ptime", data.ptime);
-    form.append("description", data.description);
-    form.append("ingredients", JSON.stringify(data.ingredients));
-    form.append("methods", JSON.stringify(data.methods));
-    form.append("tags", JSON.stringify(data.tags));
-    form.append("size", data.size);
-    form.append("name", data.name);
-    form.append("id", a.user._id);
-    form.append("photo", fileName);
-    form.append("type", data.foodtype);
-    form.append("culture", data.culture);
-
-    photoForm.append("name", fileName);
-    photoForm.append("file", img);
-
-    await axios
-      .post("http://localhost:8800/api/recipes/photo", photoForm, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    await axios
-      .post("http://localhost:8800/api/recipes", form, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    setImg(null);
-    setImage(null);
-    reset();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    console.log(data);
+    // const photoForm = new FormData();
+    // const fileName = Date.now() + img.name;
+    // const form = new FormData();
+    // form.append("ctime", data.ctime);
+    // form.append("ptime", data.ptime);
+    // form.append("description", data.description);
+    // form.append("ingredients", JSON.stringify(data.ingredients));
+    // form.append("methods", JSON.stringify(data.methods));
+    // form.append("tags", JSON.stringify(data.tags));
+    // form.append("size", data.size);
+    // form.append("name", data.name);
+    // form.append("id", a.user._id);
+    // form.append("photo", fileName);
+    // form.append("type", data.foodtype);
+    // form.append("culture", data.culture);
+    // photoForm.append("name", fileName);
+    // photoForm.append("file", img);
+    // await axios
+    //   .post("http://localhost:8800/api/recipes/photo", photoForm, {
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    // await axios
+    //   .post("http://localhost:8800/api/recipes", form, {
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    // setImg(null);
+    // setImage(null);
+    // setError(false);
+    // reset();
+    // window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (loading) {
@@ -110,7 +112,7 @@ function Add() {
   } else {
     return (
       <Layout>
-        <div className='grid grid-cols-2 '>
+        <div className='grid grid-cols-2'>
           <div className=''>
             <div className='w-full my-16 px-10 max-w-[90%] mx-auto'>
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -125,7 +127,7 @@ function Add() {
                     type='text'
                     id='name'
                     className='border-0 border-b-2 focus:outline-none border-gray-400'
-                    {...register("name", { required: true, maxLength: 30 })}
+                    {...register("name", { required: true, maxLength: 60 })}
                   />
                 </div>
                 <div className='flex gap-x-12'>
@@ -139,7 +141,7 @@ function Add() {
                       type='number'
                       id='ptime'
                       className='border-0 border-b-2 focus:outline-none border-gray-400'
-                      {...register("ptime", { required: true, maxLength: 30 })}
+                      {...register("ptime", { required: true, maxLength: 5 })}
                     />
                   </div>
                   <div className=' flex flex-col w-full gap-y-4 '>
@@ -152,7 +154,7 @@ function Add() {
                       id='ctime'
                       type='number'
                       className='border-0 border-b-2 focus:outline-none border-gray-400'
-                      {...register("ctime", { required: true, maxLength: 30 })}
+                      {...register("ctime", { required: true, maxLength: 5 })}
                     />
                   </div>
                 </div>
@@ -166,7 +168,7 @@ function Add() {
                     placeholder='How many people would this dish feed?'
                     id='size'
                     type='number'
-                    {...register("size", { required: true, maxLength: 30 })}
+                    {...register("size", { required: true, maxLength: 3 })}
                     className='border-0 border-b-2 focus:outline-none border-gray-400'
                   />
                 </div>
@@ -179,7 +181,7 @@ function Add() {
                   <select
                     className='border-0 py-3 border-b-2 focus:outline-none border-gray-400'
                     id='type'
-                    {...register("foodtype")}
+                    {...register("foodtype", { required: true })}
                   >
                     <option value='Mains'>Mains</option>
                     <option value='Soup'>Soup</option>
@@ -199,7 +201,7 @@ function Add() {
                   <select
                     className='border-0 py-3 border-b-2 focus:outline-none border-gray-400'
                     id='culture'
-                    {...register("culture")}
+                    {...register("culture", { required: true })}
                   >
                     <option value='Newari'>Newari</option>
                     <option value='Gurung'>Gurung</option>
@@ -214,7 +216,7 @@ function Add() {
                 <div className=' flex flex-col w-full gap-y-6 my-8 '>
                   <label>
                     <span className=' text-[color:var(--primary)] text-xl'>
-                      Description
+                      Description ( 500 words )
                     </span>
                   </label>
                   <textarea
@@ -433,9 +435,21 @@ function Add() {
                     </div>
                   </div>
                 </div>
+                {isValid ? (
+                  ""
+                ) : (
+                  <p className='text-red-500 my-2'>
+                    Check for any errors in the form!!
+                  </p>
+                )}
                 <button
                   type='submit'
-                  className=' text-white bg-[color:var(--primary)] py-1 px-3 rounded-lg'
+                  className={
+                    isValid
+                      ? "text-white bg-[color:var(--primary)] py-1 px-3 rounded-lg"
+                      : "bg-gray-400 py-1 px-3 rounded-lg text-white"
+                  }
+                  disabled={!isDirty || !isValid}
                 >
                   Submit
                 </button>

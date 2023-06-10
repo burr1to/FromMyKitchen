@@ -8,34 +8,29 @@ function Favorite({ path, user, data }) {
 
   const handleClick = (e) => {
     setClick(!click);
-    // if (!click) {
-    //   console.log("Favorited");
-    //   axios.post(
-    //     "http://localhost:8800/api/favorite",
-    //     {
-    //       userID: user._id,
-    //       recipeID: path,
-    //       photo: data.photo,
-    //       name: data.name,
-    //     },
-    //     { withCredentials: true }
-    //   );
-    // } else {
-    //   console.log("Unfavorited");
-    //   axios.delete(`http://localhost:8800/api/favorite/${path}/${user._id}`);
-    // }
+    if (!click) {
+      console.log("Favorited");
+      axios.patch(
+        `http://localhost:8800/api/users/favorite/${user}/${path}`,
+        {},
+        { withCredentials: true }
+      );
+    } else {
+      axios.patch(
+        `http://localhost:8800/api/users/unfavorite/${user}/${path}`,
+        {},
+        { withCredentials: true }
+      );
+    }
   };
 
   return (
-    <div
-      className='border border-gray-500 flex py-2 px-4 items-center gap-x-4 rounded-lg cursor-pointer'
-      onClick={handleClick}
-    >
+    <div className='cursor-pointer'>
       <BsHeartFill
         size='30px'
+        onClick={handleClick}
         className={click ? " fill-[color:var(--primary)]" : " fill-gray-400"}
       />
-      <p>Favorite Recipe</p>
     </div>
   );
 }

@@ -33,16 +33,14 @@ function Profile() {
       );
       setData(userRecipe.data);
 
-      const favRecipe = await axios.get(
-        `http://localhost:8800/api/favorite/${user.user._id}`
-      );
-
-      setFavorite(favRecipe.data);
+      setFavorite("");
       setLoading(false);
     };
 
     fetch();
   }, []);
+
+  console.log(favorite);
 
   return (
     <Layout>
@@ -82,7 +80,7 @@ function Profile() {
         <hr className='border my-6 border-[color:var(--secondary)]' />
         <h2 className='text-3xl my-5 text-center'>Favorited Recipes</h2>
         <div className='flex gap-x-4 max-w-[80%] mx-auto my-10 '>
-          <ExploreBox item={favorite} loading={loading} status='favorite' />
+          {/* <ExploreBox item={favorite} loading={loading} status='favorite' /> */}
         </div>
         <hr className='border mt-12 mb-6 border-[color:var(--secondary)]' />
         <h2 className=' text-3xl my-5 text-center'>Uploaded Recipes</h2>

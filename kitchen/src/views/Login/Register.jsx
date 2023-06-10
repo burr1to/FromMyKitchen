@@ -1,4 +1,4 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import ingredient from "./../../assets/upload.png";
 import Image from "../../components/Global/Image";
 import login_img from "./../../assets/login-ingredient.png";
@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
   const { register, handleSubmit, control, reset } = useForm();
 
   const onSubmit = async (data) => {
@@ -23,6 +24,7 @@ function Register() {
         console.log(err);
       });
     reset();
+    navigate("/login");
   };
 
   return (

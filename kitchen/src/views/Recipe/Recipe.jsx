@@ -45,14 +45,16 @@ function Recipe() {
 
   return (
     <Layout>
-      <div className='my-10 relative max-w-[75%] mx-auto'>
+      <div className='w-[100%] lg:w-[90%] mx-auto'>
         <div>
           <div className='p-10'>
             <div className='flex gap-x-10 items-center'>
-              <span className='text-7xl'>{data.name}</span>
+              <span className='text-7xl text-[color:var(--primary)]'>
+                {data.name}
+              </span>
 
               {user.user ? (
-                <Favorite path={currentPath} user={user.user} data={data} />
+                <Favorite path={currentPath} user={user.user._id} data={data} />
               ) : (
                 ""
               )}
@@ -73,18 +75,27 @@ function Recipe() {
               </ul>
             </div>
 
-            <div className='grid grid-cols-2 gap-6 my-4'>
-              <div>
+            <div className='grid grid-cols-1 lg:grid-cols-2 md:gap-6 my-4'>
+              <div className='flex justify-center'>
                 <Image
                   src={`${path[0]}/${data.photo}`}
                   alt='No Image Found'
-                  className='max-w-[640px] max-h-[600px] rounded-lg'
+                  className='max-w-[700px] object-cover rounded-lg'
                 />
               </div>
 
               <div className='py-4'>
-                <p className='text-justify text-[24px]'>{data.description}</p>
-                <ul className='text-[22px] flex space-x-12 my-6'>
+                <div className='my-4'>
+                  <p className='text-[23px] my-1 text-[color:var(--primary)]'>
+                    Food Type: {data.foodtype}
+                  </p>
+                  <p className='text-[23px] my-1 text-[color:var(--primary)]'>
+                    Serving Size: {data.size} people
+                  </p>
+                </div>
+
+                <p className='text-justify text-[21px]'>{data.description}</p>
+                <ul className='text-[22px] flex flex-col my-6 gap-y-5 text-center'>
                   <li className='border border-[color:var(--secondary)] bg-[color:var(--secondary)] py-2 px-5 rounded-lg'>
                     Prep Time: {data.pTime} mins
                   </li>
@@ -93,42 +104,43 @@ function Recipe() {
                   </li>
                 </ul>
               </div>
-              <div></div>
+            </div>
+          </div>
+          <div className='grid grid-cols-2 '>
+            <div className='max-w-[60%]'>
+              <span className='text-3xl my-12'>Ingredients</span>
+              <ul className='text-[22px] my-5'>
+                {data.ingredients?.map((ingredient, index) => (
+                  <li className='mt-1' key={index}>
+                    <div className='relative '>
+                      {ingredient.name}
+                      <span className='absolute right-0'>
+                        {ingredient.quantity} {ingredient.unit}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className=''>
+              <span className='text-3xl'>Instructions</span>
+              <ul className='text-[19px] my-5'>
+                {data.methods?.map((method, index) => (
+                  <li className='mt-1' key={index}>
+                    <div className='relative'>
+                      {index + 1}. {method.method}
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
-          <div className='my-16 max-w-[20%]'>
-            <span className='text-3xl my-12'>Ingredients</span>
-            <ul className='text-[19px] my-5'>
-              {data.ingredients?.map((ingredient, index) => (
-                <li className='mt-1' key={index}>
-                  <div className='relative '>
-                    {ingredient.name}
-                    <span className='absolute right-0'>
-                      {ingredient.quantity} {ingredient.unit}
-                    </span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className='my-16'>
-            <span className='text-3xl'>Instructions</span>
-            <ul className='text-[19px] my-5'>
-              {data.methods?.map((method, index) => (
-                <li className='mt-1' key={index}>
-                  <div className='relative'>
-                    {index + 1}. {method.method}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
           {user.user && data.userID === user.user._id ? (
             <div
               onClick={handleClick}
-              className='flex justify-center py-2 px-4 border border-[color:var(--secondary)] active:bg-[color:var(--secondary)] active:text-white rounded-lg hover:bg-[color:var(--secondary)] hover:text-white cursor-pointer text-xl'
+              className='flex justify-center py-2 px-4 border border-[color:var(--secondary)] active:bg-[color:var(--secondary)] active:text-white rounded-lg hover:bg-[color:var(--secondary)] hover:text-white cursor-pointer text-xl my-10'
             >
               Update your recipe
             </div>
@@ -136,10 +148,11 @@ function Recipe() {
             ""
           )}
         </div>
-        <div>
-          <h1 className='my-14 text-3xl'>Comments</h1>
+        <hr />
+        <div className='my-8'>
+          <h1 className='text-3xl mt-10'>Comments</h1>
           {loading ? (
-            <div className='flex justify-center w-[100%] items-center'>
+            <div className='flex justify-center items-center'>
               <ClipLoader
                 color={"orange"}
                 loading={loading}
