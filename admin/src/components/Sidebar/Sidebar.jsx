@@ -15,7 +15,7 @@ function Sidebar() {
     <div className='sidebar'>
       <div className='top'>
         <Link to='/' style={{ textDecoration: "none" }}>
-          <span className='logo'>Cubex</span>
+          <span className='logo'>Kitchen Admin Panel</span>
         </Link>
       </div>
       <hr />

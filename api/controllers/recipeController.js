@@ -43,7 +43,7 @@ export const getUserRecipe = async (req, res, next) => {
 };
 export const getAllRecipes = async (req, res, next) => {
   try {
-    const recipes = await Recipe.find().select("name _id photo");
+    const recipes = await Recipe.find();
     res.status(200).json(recipes);
   } catch (err) {
     res.send(400).send(err);

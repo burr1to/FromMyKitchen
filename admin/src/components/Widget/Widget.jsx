@@ -6,18 +6,16 @@ import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalance
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 
-function Widget({ type }) {
+function Widget({ type, recipe }) {
   let data;
 
-  //temp
-
-  const amount = 100;
   const diff = 20;
 
   switch (type) {
     case "user":
       data = {
         title: "USERS",
+        amount: 10,
         isMoney: false,
         link: "See all users",
         icon: (
@@ -34,6 +32,7 @@ function Widget({ type }) {
     case "recipes":
       data = {
         title: "RECIPES",
+        amount: recipe.length,
         isMoney: false,
         link: "View all recipes",
         icon: (
@@ -85,7 +84,7 @@ function Widget({ type }) {
       <div className='left'>
         <span className='title'>{data.title}</span>
         <span className='counter'>
-          {data.isMoney && "$"} {amount}
+          {data.isMoney && "$"} {data.amount}
         </span>
         {type === "user" || type === "recipes" ? (
           <span className='link'>{data.link}</span>

@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Datatable from "../../components/Datatable/Datatable";
 import "./list.scss";
 
-function List() {
+function ProductList() {
   return (
     <div className='list'>
       <Sidebar />
@@ -16,4 +16,4 @@ function List() {
   );
 }
 
-export default List;
+export default ProductList;
