@@ -46,7 +46,7 @@ export const getAllRecipes = async (req, res, next) => {
     const recipes = await Recipe.find();
     res.status(200).json(recipes);
   } catch (err) {
-    res.send(400).send(err);
+    res.status(400).send(err);
   }
 };
 

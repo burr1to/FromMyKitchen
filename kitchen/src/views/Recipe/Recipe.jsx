@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import path from "./../../context/utils";
 
 function Recipe() {
-  const [comment, setComment] = useState([]);
   const [data, setData] = useState({});
 
   const [loading, setLoading] = useState(false);
@@ -28,11 +27,8 @@ function Recipe() {
       const recipe = await axios.get(
         `http://localhost:8800/api/recipes/${currentPath}`
       );
-      const res = await axios.get(
-        `http://localhost:8800/api/comments/${currentPath}`
-      );
+
       setData(recipe.data);
-      setComment(res.data);
       setLoading(false);
     };
     fetch();
@@ -148,7 +144,7 @@ function Recipe() {
             ""
           )}
         </div>
-        <hr />
+        <hr className='my-8' />
         <div className='my-8'>
           <h1 className='text-3xl mt-10'>Comments</h1>
           {loading ? (
@@ -163,7 +159,7 @@ function Recipe() {
               />
             </div>
           ) : (
-            <Comment comment={comment} path={currentPath} user={user} />
+            <Comment path={currentPath} user={user.user} />
           )}
         </div>
       </div>

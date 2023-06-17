@@ -1,15 +1,12 @@
 import { React, useState, useContext } from "react";
-import {
-  AiOutlineClose,
-  AiOutlineMenu,
-  AiOutlineLogin,
-  AiOutlineLogout,
-} from "react-icons/ai";
+import { AiOutlineClose, AiOutlineMenu, AiOutlineUser } from "react-icons/ai";
 import Image from "./../../components/Global/Image";
 import logo from "./../../assets/Illustration.png";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { BiLogIn, BiLogOut, BiUser } from "react-icons/bi";
+import path from "./../../context/utils";
 
 export default function Navbar() {
   const [nav, setNav] = useState(false);
@@ -19,7 +16,7 @@ export default function Navbar() {
   const handleNav = () => {
     setNav(!nav);
   };
-  const { user, loading, error, dispatch } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,24 +45,31 @@ export default function Navbar() {
   return (
     <div className='flex justify-between items-center max-w-[1360px] mx-auto px-4 relative text-black '>
       <div className='w-full'>
-        <Link className='' to={"/"}>
+        <Link to={"/"}>
           <Image src={logo} className='w-[50%] h-auto' />
         </Link>
       </div>
 
       <ul className='hidden md:flex flex-row-reverse items-center justify-start gap-x-6 w-full text-[18px]'>
         {user ? (
-          <li onClick={handleSubmit} className='p-4 cursor-pointer'>
-            Logout
+          <li onClick={handleSubmit} className='cursor-pointer'>
+            <BiLogOut size='30px' />
           </li>
         ) : (
-          <li onClick={handleSubmit} className='p-4 cursor-pointer'>
-            Login
+          <li onClick={handleSubmit} className='cursor-pointer'>
+            <BiLogIn size='30px' />
           </li>
         )}
-        <li className='p-4 cursor-pointer'>
+        <li className='cursor-pointer'>
           <Link to={user ? `/profile/${user._id}` : "/login"}>
-            Your Profile
+            {user ? (
+              <Image
+                src={`${path[0]}/${user.profilePicture}`}
+                className='h-[42px] w-[42px] rounded-[100%]'
+              />
+            ) : (
+              <BiUser size='30px' />
+            )}
           </Link>
         </li>
 

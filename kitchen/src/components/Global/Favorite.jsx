@@ -12,7 +12,10 @@ function Favorite({ path, user, data }) {
       console.log("Favorited");
       axios.patch(
         `http://localhost:8800/api/users/favorite/${user}/${path}`,
-        {},
+        {
+          recipeID: path,
+          userID: user,
+        },
         { withCredentials: true }
       );
     } else {
