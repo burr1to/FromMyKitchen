@@ -63,48 +63,48 @@ function Add() {
 
   const onSubmit = async (data) => {
     console.log(data);
-    // const photoForm = new FormData();
-    // const fileName = Date.now() + img.name;
-    // const form = new FormData();
-    // form.append("ctime", data.ctime);
-    // form.append("ptime", data.ptime);
-    // form.append("description", data.description);
-    // form.append("ingredients", JSON.stringify(data.ingredients));
-    // form.append("methods", JSON.stringify(data.methods));
-    // form.append("tags", JSON.stringify(data.tags));
-    // form.append("size", data.size);
-    // form.append("name", data.name);
-    // form.append("id", a.user._id);
-    // form.append("photo", fileName);
-    // form.append("type", data.foodtype);
-    // form.append("culture", data.culture);
-    // photoForm.append("name", fileName);
-    // photoForm.append("file", img);
-    // await axios
-    //   .post("http://localhost:8800/api/recipes/photo", photoForm, {
-    //     withCredentials: true,
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // await axios
-    //   .post("http://localhost:8800/api/recipes", form, {
-    //     withCredentials: true,
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // setImg(null);
-    // setImage(null);
-    // setError(false);
-    // reset();
-    // window.scrollTo({ top: 0, behavior: "smooth" });
+    const photoForm = new FormData();
+    const fileName = Date.now() + img.name;
+    const form = new FormData();
+    form.append("ctime", data.ctime);
+    form.append("ptime", data.ptime);
+    form.append("description", data.description);
+    form.append("ingredients", JSON.stringify(data.ingredients));
+    form.append("methods", JSON.stringify(data.methods));
+    form.append("tags", JSON.stringify(data.tags));
+    form.append("size", data.size);
+    form.append("name", data.name);
+    form.append("id", a.user._id);
+    form.append("photo", fileName);
+    form.append("type", data.foodtype);
+    form.append("culture", data.culture);
+    photoForm.append("name", fileName);
+    photoForm.append("file", img);
+    await axios
+      .post("http://localhost:8800/api/recipes/photo", photoForm, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    await axios
+      .post("http://localhost:8800/api/recipes", form, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setImg(null);
+    setImage(null);
+    setError(false);
+    reset();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (loading) {

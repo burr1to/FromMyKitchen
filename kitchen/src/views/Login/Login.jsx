@@ -12,7 +12,7 @@ export default function Login() {
 
   const { register, handleSubmit, control } = useForm();
 
-  const { user, loading, error, dispatch } = useContext(AuthContext);
+  const { user, loading, dispatch } = useContext(AuthContext);
   const onSubmit = async (data) => {
     dispatch({ type: "LOGIN_START" });
     try {
@@ -31,30 +31,26 @@ export default function Login() {
   };
 
   return (
-    <div className='flex h-screen'>
-      <div className='w-2/5 bg-[#FF9B0017] relative'>
-        <div className='h-full'>
-          <img
-            src={login_img}
-            alt='Image'
-            className='object-cover h-full ml-50 mt-12'
-            style={{ minWidth: "115%" }}
-          />
-          <div className='absolute top-0 left-0 p-10'>
-            <Link to='/'>
-              <img
-                src={logo}
-                alt='Logo'
-                className='logo-image ml-20 -mt-10'
-                style={{ height: "115px", width: "230px" }}
-              />
-            </Link>
-          </div>
-        </div>
+    <div className='grid grid-cols-3 h-[100vh]'>
+      <div className='hidden lg:flex bg-[#FF9B0017] relative'>
+        <Image
+          src={login_img}
+          alt='Image'
+          className='object-cover absolute h-screen left-0'
+        />
       </div>
-      <div className='w-3/5 flex flex-col justify-center items-center'>
-        <div className='w-2/3'>
-          <h2 className='text-4xl font-bold mb-10'>Login</h2>
+
+      <div className='col-span-3 lg:col-span-2 flex flex-col justify-center items-center bg-white'>
+        <div className=''>
+          <Link to='/'>
+            <Image
+              src={logo}
+              alt='Logo'
+              className='logo-image w-[300px] px-6 py-1'
+            />
+          </Link>
+        </div>
+        <div className='w-full text-center mx-auto '>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='mb-6'>
               <label
@@ -66,7 +62,7 @@ export default function Login() {
               <input
                 type='text'
                 id='username'
-                className='w-full px-3 py-2 rounded-md bg-[#F2EEE8] border-none text-lg focus:ring-0 sm:w-2/5'
+                className='w-full px-3 py-2 rounded-md bg-[#F2EEE8] border-none text-lg focus:outline-none sm:w-2/5'
                 {...register("username", { required: true, maxLength: 30 })}
               />
             </div>
@@ -80,23 +76,23 @@ export default function Login() {
               <input
                 type='password'
                 id='password'
-                className='w-full px-3 py-2 rounded-md bg-[#F2EEE8] border-none text-lg focus:ring-0 sm:w-2/5'
+                className='w-full px-3 py-2 rounded-md bg-[#F2EEE8] border-none text-lg focus:outline-none sm:w-2/5'
                 {...register("password", { required: true, maxLength: 30 })}
               />
             </div>
-            <div className='flex justify-between items-center mb-6'>
-              <div className='text-gray-700 text-2xl absolute top-0 right-0 mt-5 mr-8 '>
-                Don't have an account? {""}
-                <Link to='/signup' className='text-[#FF9B00]'>
-                  Sign up
-                </Link>
-              </div>
+            <div className='flex flex-col items-center mb-6 space-y-4'>
               <button
                 type='submit'
-                className='bg-[#FF9B00] text-white py-2 px-6 rounded-md text-xl font-bold transition duration-300'
+                className='bg-[#FF9B00] text-white py-2 px-6 rounded-md text-xl font-bold transition'
               >
                 Login
               </button>
+              <div className='text-xl'>
+                <p>Don't have an account?</p>
+                <Link to='/signup' className='text-[#FF9B00] '>
+                  Sign up here
+                </Link>
+              </div>
             </div>
           </form>
         </div>

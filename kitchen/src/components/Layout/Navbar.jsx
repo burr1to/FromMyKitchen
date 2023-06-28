@@ -66,7 +66,7 @@ export default function Navbar() {
             {user ? (
               <Image
                 src={`${path[0]}/${user.profilePicture}`}
-                className='h-[42px] w-[42px] rounded-[100%]'
+                className='h-[42px] w-[42px] rounded-[100%] object-cover'
               />
             ) : (
               <BiUser size='30px' />
