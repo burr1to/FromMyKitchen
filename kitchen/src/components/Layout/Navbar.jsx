@@ -42,7 +42,7 @@ export default function Navbar() {
         });
     }
   };
-  console.log(user);
+
   return (
     <div className='flex justify-between items-center max-w-[1360px] mx-auto px-4 relative text-black '>
       <div className='w-full'>

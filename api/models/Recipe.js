@@ -26,7 +26,6 @@ const RecipeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
     culture: {
       type: String,
       requited: true,
@@ -36,9 +35,9 @@ const RecipeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    ingredients: [
+    ingName: [String],
+    ingAttr: [
       {
-        name: String,
         quantity: Number,
         unit: String,
       },
